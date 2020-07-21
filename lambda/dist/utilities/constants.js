@@ -23,6 +23,7 @@ var LocaleTypes;
 })(LocaleTypes = exports.LocaleTypes || (exports.LocaleTypes = {}));
 var Strings;
 (function (Strings) {
+    Strings["QUESTIONS"] = "QUESTIONS";
     Strings["SKILL_NAME"] = "SKILL_NAME";
     Strings["WELCOME_MSG"] = "WELCOME_MSG";
     Strings["GOODBYE_MSG"] = "GOODBYE_MSG";

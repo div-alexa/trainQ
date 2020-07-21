@@ -1,4 +1,4 @@
-import { ErrorHandler, HandlerInput } from 'ask-sdk-core';
+import { HandlerInput } from 'ask-sdk-core';
 //import { RequestTypes, Strings, ANSWER_COUNT, GAME_LENGTH } from '../utilities/constants';
 import * as cons from '../utilities/constants';
 import i18n from 'i18next';
@@ -27,6 +27,60 @@ function populateGameQuestions(translatedQuestions) {
 	return gameQuestions;
 }
 
+function populateRoundAnswers(
+	gameQuestionIndexes,
+	currentQuestionIndex,
+	correctAnswerTargetLocation,
+	translatedQuestions
+) {
+	const answers = [];
+	const answersDisp = [];
+	const translatedQuestion =
+		translatedQuestions[gameQuestionIndexes[currentQuestionIndex]];
+	const answersCopy = translatedQuestion[
+		Object.keys(translatedQuestion)[0]
+	].slice();
+	const answersCopyDisp = translatedQuestion[
+		Object.keys(translatedQuestion)[1]
+	].slice();
+	let index = answersCopy.length;
+	console.log('index:' + index);
+	console.log('answersCopy:' + answersCopy);
+	console.log('translateQuestion:' + Object.keys(translatedQuestion)[0]);
+	if (index < cons.ANSWER_COUNT) {
+		throw new Error('Not enough answers for question.');
+	}
+
+	// Shuffle the answers, excluding the first element which is the correct answer.
+	for (let j = 1; j < answersCopy.length; j += 1) {
+		const rand = Math.floor(Math.random() * (index - 1)) + 1;
+		index -= 1;
+
+		const swapTemp1 = answersCopy[index];
+		answersCopy[index] = answersCopy[rand];
+		answersCopy[rand] = swapTemp1;
+
+		const swapTemp3 = answersCopyDisp[index];
+		answersCopyDisp[index] = answersCopyDisp[rand];
+		answersCopyDisp[rand] = swapTemp3;
+	}
+
+	// Swap the correct answer into the target location
+	for (let i = 0; i < cons.ANSWER_COUNT; i += 1) {
+		answers[i] = answersCopy[i];
+		answersDisp[i] = answersCopyDisp[i];
+	}
+	const swapTemp2 = answers[0];
+	answers[0] = answers[correctAnswerTargetLocation];
+	answers[correctAnswerTargetLocation] = swapTemp2;
+
+	const swapTemp4 = answersDisp[0];
+	answersDisp[0] = answersDisp[correctAnswerTargetLocation];
+	answersDisp[correctAnswerTargetLocation] = swapTemp4;
+
+	return [answers, answersDisp];
+}
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function startGame(newGame: any, handlerInput: HandlerInput) {
 	const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
@@ -36,26 +90,9 @@ export function startGame(newGame: any, handlerInput: HandlerInput) {
 		  i18n.t(cons.Strings.WELCOME_MSG, { num: cons.GAME_LENGTH })
 		: '';
 
-	return handlerInput.responseBuilder
-		.speak(speechOutput)
-		.reprompt(speechOutput)
-		.withSimpleCard(i18n.t(cons.Strings.SKILL_NAME), speechOutput)
-		.getResponse();
-
-	let translatedQuestions;
-	//セッションアトリビュートの値で出題するクイズを切り替え
-	switch (attributes.quizName) {
-		case 'localBeer':
-			translatedQuestions = requestAttributes.t('QUESTIONS_LB');
-			break;
-		case 'cocktail':
-			translatedQuestions = requestAttributes.t('QUESTIONS_CT');
-			break;
-		default:
-			translatedQuestions = requestAttributes.t('QUESTIONS');
-	}
+	const translatedQuestions = i18n.t('QUESTIONS');
 	const gameQuestions = populateGameQuestions(translatedQuestions);
-	const correctAnswerIndex = Math.floor(Math.random() * ANSWER_COUNT);
+	const correctAnswerIndex = Math.floor(Math.random() * cons.ANSWER_COUNT);
 
 	const roundAnswersList = populateRoundAnswers(
 		gameQuestions,
@@ -66,12 +103,21 @@ export function startGame(newGame: any, handlerInput: HandlerInput) {
 	const roundAnswers = roundAnswersList[0];
 	const roundAnswersDisp = roundAnswersList[1];
 	const currentQuestionIndex = 0;
+
 	const spokenQuestion = Object.keys(
 		translatedQuestions[gameQuestions[currentQuestionIndex]]
 	)[0];
 	const displayQuestion = Object.keys(
 		translatedQuestions[gameQuestions[currentQuestionIndex]]
 	)[1];
+	console.log(spokenQuestion);
+	console.log(displayQuestion);
+	return handlerInput.responseBuilder
+		.speak(speechOutput)
+		.reprompt(speechOutput)
+		.withSimpleCard(i18n.t(cons.Strings.SKILL_NAME), speechOutput)
+		.getResponse();
+
 	// 第x門、ジャジャンまで含める。
 	speechOutput += requestAttributes.t(
 		'TELL_QUESTION_MESSAGE',

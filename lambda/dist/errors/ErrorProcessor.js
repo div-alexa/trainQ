@@ -11,6 +11,7 @@ var i18next_1 = __importDefault(require("i18next"));
  * unexpected happens.
  */
 exports.ErrorProcessor = {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     canHandle: function (handlerInput, error) {
         return true;
     },

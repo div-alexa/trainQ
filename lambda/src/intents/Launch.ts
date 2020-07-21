@@ -1,8 +1,7 @@
 import { RequestHandler, HandlerInput } from 'ask-sdk-core';
-import { RequestTypes, Strings } from '../utilities/constants';
+import { RequestTypes } from '../utilities/constants';
 import { IsType } from '../utilities/helpers';
 import { startGame } from '../utilities/game';
-import i18n from 'i18next';
 
 export const Launch: RequestHandler = {
 	canHandle(handlerInput: HandlerInput) {

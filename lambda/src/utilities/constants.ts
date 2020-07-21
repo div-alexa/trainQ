@@ -19,6 +19,7 @@ export enum LocaleTypes {
 }
 
 export enum Strings {
+	QUESTIONS = 'QUESTIONS',
 	SKILL_NAME = 'SKILL_NAME',
 	WELCOME_MSG = 'WELCOME_MSG',
 	GOODBYE_MSG = 'GOODBYE_MSG',

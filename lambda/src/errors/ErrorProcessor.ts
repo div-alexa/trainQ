@@ -7,6 +7,7 @@ import i18n from 'i18next';
  * unexpected happens.
  */
 export const ErrorProcessor: ErrorHandler = {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	canHandle(handlerInput: HandlerInput, error: Error) {
 		return true;
 	},

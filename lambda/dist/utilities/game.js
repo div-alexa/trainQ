@@ -46,6 +46,43 @@ function populateGameQuestions(translatedQuestions) {
     }
     return gameQuestions;
 }
+function populateRoundAnswers(gameQuestionIndexes, currentQuestionIndex, correctAnswerTargetLocation, translatedQuestions) {
+    var answers = [];
+    var answersDisp = [];
+    var translatedQuestion = translatedQuestions[gameQuestionIndexes[currentQuestionIndex]];
+    var answersCopy = translatedQuestion[Object.keys(translatedQuestion)[0]].slice();
+    var answersCopyDisp = translatedQuestion[Object.keys(translatedQuestion)[1]].slice();
+    var index = answersCopy.length;
+    console.log('index:' + index);
+    console.log('answersCopy:' + answersCopy);
+    console.log('translateQuestion:' + Object.keys(translatedQuestion)[0]);
+    if (index < cons.ANSWER_COUNT) {
+        throw new Error('Not enough answers for question.');
+    }
+    // Shuffle the answers, excluding the first element which is the correct answer.
+    for (var j = 1; j < answersCopy.length; j += 1) {
+        var rand = Math.floor(Math.random() * (index - 1)) + 1;
+        index -= 1;
+        var swapTemp1 = answersCopy[index];
+        answersCopy[index] = answersCopy[rand];
+        answersCopy[rand] = swapTemp1;
+        var swapTemp3 = answersCopyDisp[index];
+        answersCopyDisp[index] = answersCopyDisp[rand];
+        answersCopyDisp[rand] = swapTemp3;
+    }
+    // Swap the correct answer into the target location
+    for (var i = 0; i < cons.ANSWER_COUNT; i += 1) {
+        answers[i] = answersCopy[i];
+        answersDisp[i] = answersCopyDisp[i];
+    }
+    var swapTemp2 = answers[0];
+    answers[0] = answers[correctAnswerTargetLocation];
+    answers[correctAnswerTargetLocation] = swapTemp2;
+    var swapTemp4 = answersDisp[0];
+    answersDisp[0] = answersDisp[correctAnswerTargetLocation];
+    answersDisp[correctAnswerTargetLocation] = swapTemp4;
+    return [answers, answersDisp];
+}
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function startGame(newGame, handlerInput) {
     var requestAttributes = handlerInput.attributesManager.getRequestAttributes();
@@ -54,31 +91,22 @@ function startGame(newGame, handlerInput) {
         ? i18next_1.default.t(cons.Strings.NEW_GAME_MSG, { skillName: 'テスト' }) +
             i18next_1.default.t(cons.Strings.WELCOME_MSG, { num: cons.GAME_LENGTH })
         : '';
-    return handlerInput.responseBuilder
-        .speak(speechOutput)
-        .reprompt(speechOutput)
-        .withSimpleCard(i18next_1.default.t(cons.Strings.SKILL_NAME), speechOutput)
-        .getResponse();
-    var translatedQuestions;
-    //セッションアトリビュートの値で出題するクイズを切り替え
-    switch (attributes.quizName) {
-        case 'localBeer':
-            translatedQuestions = requestAttributes.t('QUESTIONS_LB');
-            break;
-        case 'cocktail':
-            translatedQuestions = requestAttributes.t('QUESTIONS_CT');
-            break;
-        default:
-            translatedQuestions = requestAttributes.t('QUESTIONS');
-    }
+    var translatedQuestions = i18next_1.default.t('QUESTIONS');
     var gameQuestions = populateGameQuestions(translatedQuestions);
-    var correctAnswerIndex = Math.floor(Math.random() * ANSWER_COUNT);
+    var correctAnswerIndex = Math.floor(Math.random() * cons.ANSWER_COUNT);
     var roundAnswersList = populateRoundAnswers(gameQuestions, 0, correctAnswerIndex, translatedQuestions);
     var roundAnswers = roundAnswersList[0];
     var roundAnswersDisp = roundAnswersList[1];
     var currentQuestionIndex = 0;
     var spokenQuestion = Object.keys(translatedQuestions[gameQuestions[currentQuestionIndex]])[0];
     var displayQuestion = Object.keys(translatedQuestions[gameQuestions[currentQuestionIndex]])[1];
+    console.log(spokenQuestion);
+    console.log(displayQuestion);
+    return handlerInput.responseBuilder
+        .speak(speechOutput)
+        .reprompt(speechOutput)
+        .withSimpleCard(i18next_1.default.t(cons.Strings.SKILL_NAME), speechOutput)
+        .getResponse();
     // 第x門、ジャジャンまで含める。
     speechOutput += requestAttributes.t('TELL_QUESTION_MESSAGE', '1', questionSnd);
     var repromptText = spokenQuestion + '<break time="2s"/>';
