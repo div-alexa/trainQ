@@ -6,14 +6,15 @@ var constants_1 = require("./constants");
 exports.strings = (_a = {},
     _a[constants_1.LocaleTypes.jaJP] = {
         translation: {
-            SKILL_NAME: 'スキルテンプレート',
-            WELCOME_MSG: 'ようこそハローワールドへ',
+            SKILL_NAME: '鉄道クイズ',
+            WELCOME_MSG: '鉄道のさんたくクイズを {{num}} 問だします。番号で答えてくださいね？',
             HELLO_MSG: 'こんにちは',
             HELP_MSG: 'ヘルプメッセージ',
             GOODBYE_MSG: 'さようなら',
             REFLECTOR_MSG: '次のインテントが呼ばれました {{intentName}}',
             FALLBACK_MSG: 'フォールバックメッセージ',
             ERROR_MSG: 'エラーメッセージ',
+            NEW_GAME_MSG: ' {{skillName}} へようこそ。',
         },
     },
     _a[constants_1.LocaleTypes.esES] = {
@@ -27,6 +28,11 @@ exports.strings = (_a = {},
             FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
             ERROR_MSG: 'Lo siento, ha habido un error. Por favor inténtalo otra vez.',
         },
+    },
+    _a.ja = {
+        translation: {
+            WELCOME_MSG: 'ようこそハローワールドまだ',
+        }
     },
     _a);
 //# sourceMappingURL=strings.js.map

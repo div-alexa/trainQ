@@ -7,14 +7,14 @@ import i18n from 'i18next';
  * unexpected happens.
  */
 export const ErrorProcessor: ErrorHandler = {
-  canHandle(handlerInput: HandlerInput, error: Error) {
-    return true;
-  },
-  handle(handlerInput: HandlerInput, error: Error) {
-    console.log('Error handled: ${error.message}');
+	canHandle(handlerInput: HandlerInput, error: Error) {
+		return true;
+	},
+	handle(handlerInput: HandlerInput, error: Error) {
+		console.log(`Error handled: ${error.message}`);
 
-    return handlerInput.responseBuilder
-      .speak(i18n.t(Strings.ERROR_MSG))
-      .getResponse();
-  },
+		return handlerInput.responseBuilder
+			.speak(i18n.t(Strings.ERROR_MSG))
+			.getResponse();
+	},
 };

@@ -25,29 +25,29 @@ function getPersistenceAdapter(tableName: string) {
 	});
 }
 
-let	skill = Alexa.SkillBuilders.custom()
-		.addRequestHandlers(
-			// Default intents
-			Launch,
-			Help,
-			Stop,
-			SessionEnded,
-			Reflector,
-			Fallback
-		)
-		.addErrorHandlers(ErrorProcessor)
-		.addRequestInterceptors(LocalizationRequestInterceptor, RequestInterceptor)
-		.addResponseInterceptors(ResponseInterceptor)
-		.withPersistenceAdapter(getPersistenceAdapter(tableName))
-		.withApiClient(new Alexa.DefaultApiClient())
-		.create();
+let skill = Alexa.SkillBuilders.custom()
+	.addRequestHandlers(
+		// Default intents
+		Launch,
+		Help,
+		Stop,
+		SessionEnded,
+		Reflector,
+		Fallback
+	)
+	.addErrorHandlers(ErrorProcessor)
+	.addRequestInterceptors(LocalizationRequestInterceptor, RequestInterceptor)
+	.addResponseInterceptors(ResponseInterceptor)
+	.withPersistenceAdapter(getPersistenceAdapter(tableName))
+	.withApiClient(new Alexa.DefaultApiClient())
+	.create();
 
 exports.handler = async (event: RequestEnvelope, context: any) => {
 	const response = await skill.invoke(event, context);
 	return response;
 };
 
-  //////////////////////////////// App ////////////////////////////////
+//////////////////////////////// App ////////////////////////////////
 
 // サーバー情報
 const PORT = 3000;

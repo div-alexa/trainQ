@@ -15,7 +15,7 @@ exports.ErrorProcessor = {
         return true;
     },
     handle: function (handlerInput, error) {
-        console.log('Error handled: ${error.message}');
+        console.log("Error handled: " + error.message);
         return handlerInput.responseBuilder
             .speak(i18next_1.default.t(constants_1.Strings.ERROR_MSG))
             .getResponse();

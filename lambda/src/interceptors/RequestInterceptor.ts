@@ -3,6 +3,7 @@ import { IntentRequest } from 'ask-sdk-model';
 
 export let storage: any;
 export let session: any;
+export let requestAttr: any;
 
 // PersistentAttributesとSessionAttributesはHandlerが処理される前に必ずあるようにしたいので、
 // Interceptor に実装
@@ -26,5 +27,8 @@ export const RequestInterceptor = {
 			console.log(error);
 			attributesManager.setSessionAttributes(session);
 		}
+
+		requestAttr = attributesManager.getRequestAttributes();
+		console.log(requestAttr);
 	},
 };

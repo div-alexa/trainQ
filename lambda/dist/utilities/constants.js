@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Strings = exports.LocaleTypes = exports.IntentTypes = exports.RequestTypes = void 0;
+exports.GAME_LENGTH = exports.ANSWER_COUNT = exports.Strings = exports.LocaleTypes = exports.IntentTypes = exports.RequestTypes = void 0;
 var RequestTypes;
 (function (RequestTypes) {
     RequestTypes["Launch"] = "LaunchRequest";
@@ -31,5 +31,8 @@ var Strings;
     Strings["ERROR_MSG"] = "ERROR_MSG";
     Strings["REFLECTOR_MSG"] = "REFLECTOR_MSG";
     Strings["FALLBACK_MSG"] = "FALLBACK_MSG";
+    Strings["NEW_GAME_MSG"] = "NEW_GAME_MSG";
 })(Strings = exports.Strings || (exports.Strings = {}));
+exports.ANSWER_COUNT = 3;
+exports.GAME_LENGTH = 5;
 //# sourceMappingURL=constants.js.map

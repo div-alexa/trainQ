@@ -7,13 +7,13 @@ import { strings } from '../utilities/strings';
  * Adds translation functions to the RequestAttributes.
  */
 export const LocalizationRequestInterceptor: RequestInterceptor = {
-  process(handlerInput) {
-    i18n.use(sprintf).init({
-      lng: handlerInput.requestEnvelope.request.locale,
-      overloadTranslationOptionHandler:
-        sprintf.overloadTranslationOptionHandler,
-      resources: strings,
-      returnObjects: true,
-    });
-  },
+	process(handlerInput) {
+		i18n.use(sprintf).init({
+			lng: handlerInput.requestEnvelope.request.locale,
+			overloadTranslationOptionHandler:
+				sprintf.overloadTranslationOptionHandler,
+			resources: strings,
+			returnObjects: true,
+		});
+	},
 };

@@ -9,13 +9,14 @@ interface IStrings {
   [Strings.ERROR_MSG]: string;
   [Strings.REFLECTOR_MSG]: string;
   [Strings.FALLBACK_MSG]: string;
+  [Strings.NEW_GAME_MSG]: string;
 }
 
 export const strings = {
   [LocaleTypes.jaJP]: {
     translation: {
-      SKILL_NAME: 'スキルテンプレート',
-      WELCOME_MSG: 'ようこそハローワールドへ',
+      SKILL_NAME: '鉄道クイズ',
+      WELCOME_MSG: '鉄道のさんたくクイズを {{num}} 問だします。番号で答えてくださいね？',
       HELLO_MSG: 'こんにちは',
       HELP_MSG: 'ヘルプメッセージ',
       GOODBYE_MSG: 'さようなら',
@@ -23,6 +24,7 @@ export const strings = {
       FALLBACK_MSG:
         'フォールバックメッセージ',
       ERROR_MSG: 'エラーメッセージ',
+      NEW_GAME_MSG: ' {{skillName}} へようこそ。',
     } as IStrings,
   },
   [LocaleTypes.esES]: {
@@ -38,4 +40,9 @@ export const strings = {
       ERROR_MSG: 'Lo siento, ha habido un error. Por favor inténtalo otra vez.',
     } as IStrings,
   },
+  ja: {
+    translation: {
+      WELCOME_MSG: 'ようこそハローワールドまだ',
+    }
+  }
 };

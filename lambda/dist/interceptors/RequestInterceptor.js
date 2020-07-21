@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RequestInterceptor = exports.session = exports.storage = void 0;
+exports.RequestInterceptor = exports.requestAttr = exports.session = exports.storage = void 0;
 // PersistentAttributesとSessionAttributesはHandlerが処理される前に必ずあるようにしたいので、
 // Interceptor に実装
 exports.RequestInterceptor = {
@@ -71,6 +71,8 @@ exports.RequestInterceptor = {
                             console.log(error);
                             attributesManager.setSessionAttributes(exports.session);
                         }
+                        exports.requestAttr = attributesManager.getRequestAttributes();
+                        console.log(exports.requestAttr);
                         return [2 /*return*/];
                 }
             });
