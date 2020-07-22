@@ -12,6 +12,8 @@ interface IStrings {
 	[Strings.REFLECTOR_MSG]: string;
 	[Strings.FALLBACK_MSG]: string;
 	[Strings.NEW_GAME_MSG]: string;
+	[Strings.TELL_QUESTION_MESSAGE]: string;
+	[Strings.DISPLAY_QUESTION_MESSAGE]: string;
 }
 
 export const strings = {
@@ -28,6 +30,8 @@ export const strings = {
 			FALLBACK_MSG: 'フォールバックメッセージ',
 			ERROR_MSG: 'エラーメッセージ',
 			NEW_GAME_MSG: ' {{skillName}} へようこそ。',
+			TELL_QUESTION_MESSAGE: 'それでは第 {{num}}問。<audio src="{{audio}}"/>',
+			DISPLAY_QUESTION_MESSAGE: '第 {{num}}問。 {{displayQ}} ',
 		} as unknown) as IStrings,
 	},
 	[LocaleTypes.esES]: {

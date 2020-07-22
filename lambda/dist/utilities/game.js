@@ -26,6 +26,7 @@ exports.startGame = void 0;
 //import { RequestTypes, Strings, ANSWER_COUNT, GAME_LENGTH } from '../utilities/constants';
 var cons = __importStar(require("../utilities/constants"));
 var i18next_1 = __importDefault(require("i18next"));
+var display_1 = require("./display");
 function populateGameQuestions(translatedQuestions) {
     var gameQuestions = [];
     var indexList = [];
@@ -100,18 +101,17 @@ function startGame(newGame, handlerInput) {
     var currentQuestionIndex = 0;
     var spokenQuestion = Object.keys(translatedQuestions[gameQuestions[currentQuestionIndex]])[0];
     var displayQuestion = Object.keys(translatedQuestions[gameQuestions[currentQuestionIndex]])[1];
-    console.log(spokenQuestion);
-    console.log(displayQuestion);
-    return handlerInput.responseBuilder
-        .speak(speechOutput)
-        .reprompt(speechOutput)
-        .withSimpleCard(i18next_1.default.t(cons.Strings.SKILL_NAME), speechOutput)
-        .getResponse();
     // 第x門、ジャジャンまで含める。
-    speechOutput += requestAttributes.t('TELL_QUESTION_MESSAGE', '1', questionSnd);
+    speechOutput += i18next_1.default.t('TELL_QUESTION_MESSAGE', {
+        num: '1',
+        audio: cons.questionSnd,
+    });
     var repromptText = spokenQuestion + '<break time="2s"/>';
-    var displayText = requestAttributes.t('DISPLAY_QUESTION_MESSAGE', '1', displayQuestion);
-    for (var i = 0; i < ANSWER_COUNT; i += 1) {
+    var displayText = i18next_1.default.t('DISPLAY_QUESTION_MESSAGE', {
+        num: '1',
+        dispQ: displayQuestion,
+    });
+    for (var i = 0; i < cons.ANSWER_COUNT; i += 1) {
         repromptText += i + 1 + "\u756A\u3001 " + roundAnswers[i] + "\u3002<break time=\"1s\"/>";
         displayText += "<br>" + (i + 1) + "\u756A\uFF1A" + roundAnswersDisp[i] + " ";
     }
@@ -133,8 +133,8 @@ function startGame(newGame, handlerInput) {
     handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
     // レスポンスの生成
     var builder = handlerInput.responseBuilder.withShouldEndSession(false);
-    console.log('supportDisplay:' + supportsDisplay(handlerInput));
-    if (supportsDisplay(handlerInput)) {
+    console.log('supportDisplay:' + display_1.supportsDisplay(handlerInput));
+    if (display_1.supportsDisplay(handlerInput)) {
         // device has display
         var aplSample = require('./apl_template_export.json');
         //  aplSample.datasources.bodyTemplate6Data.textContent.primaryText.text = repromptText;

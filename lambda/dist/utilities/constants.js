@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GAME_LENGTH = exports.ANSWER_COUNT = exports.Strings = exports.LocaleTypes = exports.IntentTypes = exports.RequestTypes = void 0;
+exports.incorrectSnd = exports.correctSnd = exports.questionSnd = exports.GAME_LENGTH = exports.ANSWER_COUNT = exports.Strings = exports.LocaleTypes = exports.IntentTypes = exports.RequestTypes = void 0;
 var RequestTypes;
 (function (RequestTypes) {
     RequestTypes["Launch"] = "LaunchRequest";
@@ -33,7 +33,12 @@ var Strings;
     Strings["REFLECTOR_MSG"] = "REFLECTOR_MSG";
     Strings["FALLBACK_MSG"] = "FALLBACK_MSG";
     Strings["NEW_GAME_MSG"] = "NEW_GAME_MSG";
+    Strings["DISPLAY_QUESTION_MESSAGE"] = "DISPLAY_QUESTION_MESSAGE";
+    Strings["TELL_QUESTION_MESSAGE"] = "TELL_QUESTION_MESSAGE";
 })(Strings = exports.Strings || (exports.Strings = {}));
 exports.ANSWER_COUNT = 3;
 exports.GAME_LENGTH = 5;
+exports.questionSnd = 'https://train-quiz.s3-ap-northeast-1.amazonaws.com/audio/question1_48k.mp3';
+exports.correctSnd = 'https://train-quiz.s3-ap-northeast-1.amazonaws.com/audio/correct1_48k.mp3';
+exports.incorrectSnd = 'https://train-quiz.s3-ap-northeast-1.amazonaws.com/audio/incorrect1_48k.mp3';
 //# sourceMappingURL=constants.js.map

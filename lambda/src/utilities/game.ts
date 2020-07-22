@@ -2,6 +2,7 @@ import { HandlerInput } from 'ask-sdk-core';
 //import { RequestTypes, Strings, ANSWER_COUNT, GAME_LENGTH } from '../utilities/constants';
 import * as cons from '../utilities/constants';
 import i18n from 'i18next';
+import { supportsDisplay } from './display';
 
 function populateGameQuestions(translatedQuestions) {
 	const gameQuestions = [];
@@ -110,27 +111,18 @@ export function startGame(newGame: any, handlerInput: HandlerInput) {
 	const displayQuestion = Object.keys(
 		translatedQuestions[gameQuestions[currentQuestionIndex]]
 	)[1];
-	console.log(spokenQuestion);
-	console.log(displayQuestion);
-	return handlerInput.responseBuilder
-		.speak(speechOutput)
-		.reprompt(speechOutput)
-		.withSimpleCard(i18n.t(cons.Strings.SKILL_NAME), speechOutput)
-		.getResponse();
 
 	// 第x門、ジャジャンまで含める。
-	speechOutput += requestAttributes.t(
-		'TELL_QUESTION_MESSAGE',
-		'1',
-		questionSnd
-	);
+	speechOutput += i18n.t('TELL_QUESTION_MESSAGE', {
+		num: '1',
+		audio: cons.questionSnd,
+	});
 	let repromptText = spokenQuestion + '<break time="2s"/>';
-	let displayText = requestAttributes.t(
-		'DISPLAY_QUESTION_MESSAGE',
-		'1',
-		displayQuestion
-	);
-	for (let i = 0; i < ANSWER_COUNT; i += 1) {
+	let displayText = i18n.t('DISPLAY_QUESTION_MESSAGE', {
+		num: '1',
+		dispQ: displayQuestion,
+	});
+	for (let i = 0; i < cons.ANSWER_COUNT; i += 1) {
 		repromptText += `${i + 1}番、 ${roundAnswers[i]}。<break time="1s"/>`;
 		displayText += `<br>${i + 1}番：${roundAnswersDisp[i]} `;
 	}
@@ -158,7 +150,7 @@ export function startGame(newGame: any, handlerInput: HandlerInput) {
 	handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
 	// レスポンスの生成
-	let builder = handlerInput.responseBuilder.withShouldEndSession(false);
+	const builder = handlerInput.responseBuilder.withShouldEndSession(false);
 	console.log('supportDisplay:' + supportsDisplay(handlerInput));
 	if (supportsDisplay(handlerInput)) {
 		// device has display

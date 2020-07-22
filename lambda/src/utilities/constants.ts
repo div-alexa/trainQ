@@ -29,7 +29,16 @@ export enum Strings {
 	REFLECTOR_MSG = 'REFLECTOR_MSG',
 	FALLBACK_MSG = 'FALLBACK_MSG',
 	NEW_GAME_MSG = 'NEW_GAME_MSG',
+	DISPLAY_QUESTION_MESSAGE = 'DISPLAY_QUESTION_MESSAGE',
+	TELL_QUESTION_MESSAGE = 'TELL_QUESTION_MESSAGE',
 }
 
 export const ANSWER_COUNT = 3;
 export const GAME_LENGTH = 5;
+
+export const questionSnd =
+	'https://train-quiz.s3-ap-northeast-1.amazonaws.com/audio/question1_48k.mp3';
+export const correctSnd =
+	'https://train-quiz.s3-ap-northeast-1.amazonaws.com/audio/correct1_48k.mp3';
+export const incorrectSnd =
+	'https://train-quiz.s3-ap-northeast-1.amazonaws.com/audio/incorrect1_48k.mp3';

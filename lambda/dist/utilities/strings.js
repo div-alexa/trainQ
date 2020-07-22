@@ -17,6 +17,8 @@ exports.strings = (_a = {},
             FALLBACK_MSG: 'フォールバックメッセージ',
             ERROR_MSG: 'エラーメッセージ',
             NEW_GAME_MSG: ' {{skillName}} へようこそ。',
+            TELL_QUESTION_MESSAGE: 'それでは第 {{num}}問。<audio src="{{audio}}"/>',
+            DISPLAY_QUESTION_MESSAGE: '第 {{num}}問。 {{displayQ}} ',
         },
     },
     _a[constants_1.LocaleTypes.esES] = {
