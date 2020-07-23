@@ -1,7 +1,7 @@
 import { HandlerInput } from 'ask-sdk-core';
 
 // スキルが画面付きデバイスで動作している時は true を返す。
-export function supportsDisplay(handlerInput: HandlerInput) {
+export function supportsDisplay(handlerInput: HandlerInput): boolean {
 	const hasDisplay =
 		handlerInput.requestEnvelope.context &&
 		handlerInput.requestEnvelope.context.System &&
@@ -10,6 +10,5 @@ export function supportsDisplay(handlerInput: HandlerInput) {
 		handlerInput.requestEnvelope.context.System.device.supportedInterfaces[
 			'Alexa.Presentation.APL'
 		];
-	console.log(hasDisplay);
-	return hasDisplay;
+	return !!hasDisplay;
 }

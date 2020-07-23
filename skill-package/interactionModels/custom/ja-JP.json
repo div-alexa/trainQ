@@ -13,21 +13,49 @@
                 },
                 {
                     "name": "AMAZON.StopIntent",
-                    "samples": []
-                },
-                {
-                    "name": "HelloWorldIntent",
-                    "slots": [],
                     "samples": [
-                        "hello",
-                        "how are you",
-                        "say hi world",
-                        "say hi",
-                        "hi",
-                        "say hello world",
-                        "say hello"
+                      "終了",
+                      "終わり",
+                      "止めて",
+                      "ストップ"
+                    ]
+                },          
+                {
+                    "name": "AnswerIntent",
+                    "slots": [
+                      {
+                        "name": "Answer",
+                        "type": "AMAZON.NUMBER"
+                      }
+                    ],
+                    "samples": [
+                      "答えは {Answer} 番",
+                      "答えは {Answer}",
+                      "{Answer} 番",
+                      "{Answer}"
                     ]
                 },
+                {
+                    "name": "AMAZON.RepeatIntent",
+                    "samples": [
+                      "もう一回聞かせて",
+                      "もう一度聞かせて",
+                      "もう一回",
+                      "もう一度"
+                    ]
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": [
+                      "クイズを続けて"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": [
+                      "いいえ"
+                    ]
+                },          
                 {
                     "name": "AMAZON.NavigateHomeIntent",
                     "samples": []

@@ -2,6 +2,7 @@ import * as Alexa from 'ask-sdk-core';
 import { ExpressAdapter } from 'ask-sdk-express-adapter';
 import express from 'express';
 import { Launch } from './intents/Launch';
+import { Answer } from './intents/Answer';
 import { Help } from './intents/Help';
 import { Stop } from './intents/Stop';
 import { Reflector } from './intents/Reflector';
@@ -28,6 +29,7 @@ const skill = Alexa.SkillBuilders.custom()
 	.addRequestHandlers(
 		// Default intents
 		Launch,
+		Answer,
 		Help,
 		Stop,
 		SessionEnded,

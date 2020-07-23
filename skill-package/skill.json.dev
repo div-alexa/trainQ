@@ -4,7 +4,7 @@
       "custom": {
         "endpoint": {
           "sslCertificateType": "Wildcard",
-          "uri": "https://25c0719cb2c5.ngrok.io"
+          "uri": "https://c2f872eecc52.ngrok.io"
         },
         "interfaces": []
       }

@@ -8,8 +8,7 @@ function supportsDisplay(handlerInput) {
         handlerInput.requestEnvelope.context.System.device &&
         handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
         handlerInput.requestEnvelope.context.System.device.supportedInterfaces['Alexa.Presentation.APL'];
-    console.log(hasDisplay);
-    return hasDisplay;
+    return !!hasDisplay;
 }
 exports.supportsDisplay = supportsDisplay;
 //# sourceMappingURL=display.js.map

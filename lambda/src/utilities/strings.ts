@@ -14,6 +14,11 @@ interface IStrings {
 	[Strings.NEW_GAME_MSG]: string;
 	[Strings.TELL_QUESTION_MESSAGE]: string;
 	[Strings.DISPLAY_QUESTION_MESSAGE]: string;
+	[Strings.ANSWER_CORRECT_MESSAGE]: string;
+	[Strings.ANSWER_WRONG_MESSAGE]: string;
+	[Strings.CORRECT_ANSWER_MESSAGE]: string;
+	[Strings.ANSWER_IS_MESSAGE]: string;
+	[Strings.GAME_OVER_MESSAGE]: string;
 }
 
 export const strings = {
@@ -32,6 +37,12 @@ export const strings = {
 			NEW_GAME_MSG: ' {{skillName}} へようこそ。',
 			TELL_QUESTION_MESSAGE: 'それでは第 {{num}}問。<audio src="{{audio}}"/>',
 			DISPLAY_QUESTION_MESSAGE: '第 {{num}}問。 {{displayQ}} ',
+			ANSWER_CORRECT_MESSAGE: '<audio src="{{audio}}"/>{{text}}、正解です。',
+			ANSWER_WRONG_MESSAGE: '<audio src="{{audio}}"/>残念、間違いです。',
+			CORRECT_ANSWER_MESSAGE: '正解は {{num}} 番の {{answer}}でした。',
+			ANSWER_IS_MESSAGE: '',
+			GAME_OVER_MESSAGE:
+				' {{numAll}} 門中 {{numCorrect}} 問正解でした。{{text}} また遊んでくださいね？',
 		} as unknown) as IStrings,
 	},
 	[LocaleTypes.esES]: {

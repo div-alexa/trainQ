@@ -3,6 +3,7 @@ import { HandlerInput } from 'ask-sdk-core';
 import * as cons from '../utilities/constants';
 import i18n from 'i18next';
 import { supportsDisplay } from './display';
+import apltemplate from './apl_template_export.json';
 
 function populateGameQuestions(translatedQuestions) {
 	const gameQuestions = [];
@@ -28,7 +29,7 @@ function populateGameQuestions(translatedQuestions) {
 	return gameQuestions;
 }
 
-function populateRoundAnswers(
+export function populateRoundAnswers(
 	gameQuestionIndexes,
 	currentQuestionIndex,
 	correctAnswerTargetLocation,
@@ -45,9 +46,9 @@ function populateRoundAnswers(
 		Object.keys(translatedQuestion)[1]
 	].slice();
 	let index = answersCopy.length;
-	console.log('index:' + index);
-	console.log('answersCopy:' + answersCopy);
-	console.log('translateQuestion:' + Object.keys(translatedQuestion)[0]);
+	//console.log('index:' + index);
+	//console.log('answersCopy:' + answersCopy);
+	//console.log('translateQuestion:' + Object.keys(translatedQuestion)[0]);
 	if (index < cons.ANSWER_COUNT) {
 		throw new Error('Not enough answers for question.');
 	}
@@ -84,7 +85,6 @@ function populateRoundAnswers(
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function startGame(newGame: any, handlerInput: HandlerInput) {
-	const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
 	const attributes = handlerInput.attributesManager.getSessionAttributes();
 	let speechOutput = newGame
 		? i18n.t(cons.Strings.NEW_GAME_MSG, { skillName: 'テスト' }) +
@@ -120,7 +120,7 @@ export function startGame(newGame: any, handlerInput: HandlerInput) {
 	let repromptText = spokenQuestion + '<break time="2s"/>';
 	let displayText = i18n.t('DISPLAY_QUESTION_MESSAGE', {
 		num: '1',
-		dispQ: displayQuestion,
+		displayQ: displayQuestion,
 	});
 	for (let i = 0; i < cons.ANSWER_COUNT; i += 1) {
 		repromptText += `${i + 1}番、 ${roundAnswers[i]}。<break time="1s"/>`;
@@ -149,12 +149,15 @@ export function startGame(newGame: any, handlerInput: HandlerInput) {
 
 	handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
+	console.log('displayText:' + displayText);
+
 	// レスポンスの生成
 	const builder = handlerInput.responseBuilder.withShouldEndSession(false);
 	console.log('supportDisplay:' + supportsDisplay(handlerInput));
 	if (supportsDisplay(handlerInput)) {
 		// device has display
-		const aplSample = require('./apl_template_export.json');
+		//const aplSample = require('./apl_template_export.json');
+		const aplSample = apltemplate;
 		//  aplSample.datasources.bodyTemplate6Data.textContent.primaryText.text = repromptText;
 		aplSample.datasources.bodyTemplate6Data.textContent.primaryText.quizResult =
 			'鉄道クイズ';

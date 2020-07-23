@@ -22,11 +22,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.startGame = void 0;
+exports.startGame = exports.populateRoundAnswers = void 0;
 //import { RequestTypes, Strings, ANSWER_COUNT, GAME_LENGTH } from '../utilities/constants';
 var cons = __importStar(require("../utilities/constants"));
 var i18next_1 = __importDefault(require("i18next"));
 var display_1 = require("./display");
+var apl_template_export_json_1 = __importDefault(require("./apl_template_export.json"));
 function populateGameQuestions(translatedQuestions) {
     var gameQuestions = [];
     var indexList = [];
@@ -54,9 +55,9 @@ function populateRoundAnswers(gameQuestionIndexes, currentQuestionIndex, correct
     var answersCopy = translatedQuestion[Object.keys(translatedQuestion)[0]].slice();
     var answersCopyDisp = translatedQuestion[Object.keys(translatedQuestion)[1]].slice();
     var index = answersCopy.length;
-    console.log('index:' + index);
-    console.log('answersCopy:' + answersCopy);
-    console.log('translateQuestion:' + Object.keys(translatedQuestion)[0]);
+    //console.log('index:' + index);
+    //console.log('answersCopy:' + answersCopy);
+    //console.log('translateQuestion:' + Object.keys(translatedQuestion)[0]);
     if (index < cons.ANSWER_COUNT) {
         throw new Error('Not enough answers for question.');
     }
@@ -84,9 +85,9 @@ function populateRoundAnswers(gameQuestionIndexes, currentQuestionIndex, correct
     answersDisp[correctAnswerTargetLocation] = swapTemp4;
     return [answers, answersDisp];
 }
+exports.populateRoundAnswers = populateRoundAnswers;
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function startGame(newGame, handlerInput) {
-    var requestAttributes = handlerInput.attributesManager.getRequestAttributes();
     var attributes = handlerInput.attributesManager.getSessionAttributes();
     var speechOutput = newGame
         ? i18next_1.default.t(cons.Strings.NEW_GAME_MSG, { skillName: 'テスト' }) +
@@ -109,7 +110,7 @@ function startGame(newGame, handlerInput) {
     var repromptText = spokenQuestion + '<break time="2s"/>';
     var displayText = i18next_1.default.t('DISPLAY_QUESTION_MESSAGE', {
         num: '1',
-        dispQ: displayQuestion,
+        displayQ: displayQuestion,
     });
     for (var i = 0; i < cons.ANSWER_COUNT; i += 1) {
         repromptText += i + 1 + "\u756A\u3001 " + roundAnswers[i] + "\u3002<break time=\"1s\"/>";
@@ -131,12 +132,14 @@ function startGame(newGame, handlerInput) {
         answerRecord: [],
     });
     handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+    console.log('displayText:' + displayText);
     // レスポンスの生成
     var builder = handlerInput.responseBuilder.withShouldEndSession(false);
     console.log('supportDisplay:' + display_1.supportsDisplay(handlerInput));
     if (display_1.supportsDisplay(handlerInput)) {
         // device has display
-        var aplSample = require('./apl_template_export.json');
+        //const aplSample = require('./apl_template_export.json');
+        var aplSample = apl_template_export_json_1.default;
         //  aplSample.datasources.bodyTemplate6Data.textContent.primaryText.text = repromptText;
         aplSample.datasources.bodyTemplate6Data.textContent.primaryText.quizResult =
             '鉄道クイズ';

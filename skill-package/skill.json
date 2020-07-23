@@ -21,8 +21,10 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "uri": "arn:aws:lambda:ap-northeast-1:224512234609:function:ask-trainquiz-default-default-1595108643437"
-        }
+          "sslCertificateType": "Wildcard",
+          "uri": "https://c2f872eecc52.ngrok.io"
+        },
+        "interfaces": []
       }
     },
     "manifestVersion": "1.0"
