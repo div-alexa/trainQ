@@ -5,7 +5,7 @@ import { storage, session } from '../interceptors/RequestInterceptor';
 export const ResponseInterceptor = {
 	async process(handlerInput: HandlerInput): Promise<void> {
 		storage.visit = '1';
-		console.log(storage);
+		console.log(session);
 		const { attributesManager } = handlerInput;
 		await attributesManager.savePersistentAttributes();
 		attributesManager.setSessionAttributes(session);

@@ -4,6 +4,7 @@ import * as cons from '../utilities/constants';
 import i18n from 'i18next';
 import { supportsDisplay } from './display';
 import apltemplate from './apl_template_export.json';
+import { storage, session } from '../interceptors/RequestInterceptor';
 
 function populateGameQuestions(translatedQuestions) {
 	const gameQuestions = [];
@@ -147,7 +148,17 @@ export function startGame(newGame: any, handlerInput: HandlerInput) {
 		answerRecord: [],
 	});
 
-	handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+	session.speechOutput = repromptText;
+	session.reprmptText = repromptText;
+	session.currentQuestionIndex = currentQuestionIndex;
+	session.correctAnswerIndex = correctAnswerIndex + 1;
+	session.questions = gameQuestions;
+	session.score = 0;
+	session.correctAnswerText =
+		translatedQuestion[Object.keys(translatedQuestion)[1]][0];
+	session.quizName = attributes.quizName;
+	session.answerRecord = [];
+	//	handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
 	console.log('displayText:' + displayText);
 

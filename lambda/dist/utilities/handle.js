@@ -66,6 +66,7 @@ var display_1 = require("./display");
 var apl_template_export_json_1 = __importDefault(require("./apl_template_export.json"));
 var game_1 = require("./game");
 var moment_1 = __importDefault(require("moment"));
+var RequestInterceptor_1 = require("../interceptors/RequestInterceptor");
 function isAnswerSlotValid(intent) {
     var answerSlotFilled = intent && intent.slots && intent.slots.Answer && intent.slots.Answer.value;
     var answerSlotIsInt = answerSlotFilled && !Number.isNaN(parseInt(intent.slots.Answer.value, 10));
@@ -119,6 +120,10 @@ function handleUserGuess(userGaveUp, handlerInput) {
                         });
                         isCorrect = 0;
                     }
+                    // 回答履歴をsessionに持たせる
+                    console.log('currentQuestionIndex:' + currentQuestionIndex);
+                    console.log('gameQuestions:' + gameQuestions);
+                    console.log('translatedQuestions:' + translatedQuestions);
                     answeredQuestion = translatedQuestions[gameQuestions[currentQuestionIndex]];
                     answeredCode = answeredQuestion[Object.keys(answeredQuestion)[3]];
                     console.log('answeredCode:' + answeredCode);
@@ -177,7 +182,7 @@ function handleUserGuess(userGaveUp, handlerInput) {
                             .getResponse())];
                 case 3:
                     currentQuestionIndex += 1;
-                    correctAnswerIndex = Math.floor(Math.random() * ANSWER_COUNT);
+                    correctAnswerIndex = Math.floor(Math.random() * cons.ANSWER_COUNT);
                     spokenQuestion = Object.keys(translatedQuestions[gameQuestions[currentQuestionIndex]])[0];
                     displayQuestion = Object.keys(translatedQuestions[gameQuestions[currentQuestionIndex]])[1];
                     roundAnswersList = game_1.populateRoundAnswers(gameQuestions, currentQuestionIndex, correctAnswerIndex, translatedQuestions);
@@ -212,6 +217,15 @@ function handleUserGuess(userGaveUp, handlerInput) {
                         correctAnswerText: translatedQuestion[Object.keys(translatedQuestion)[1]][0],
                         answerRecord: answerRecord,
                     });
+                    RequestInterceptor_1.session.speechOutput = repromptText;
+                    RequestInterceptor_1.session.reprmptText = repromptText;
+                    RequestInterceptor_1.session.currentQuestionIndex = currentQuestionIndex;
+                    RequestInterceptor_1.session.correctAnswerIndex = correctAnswerIndex + 1;
+                    RequestInterceptor_1.session.questions = gameQuestions;
+                    RequestInterceptor_1.session.score = currentScore;
+                    RequestInterceptor_1.session.correctAnswerText =
+                        translatedQuestion[Object.keys(translatedQuestion)[1]][0];
+                    RequestInterceptor_1.session.answerRecord = answerRecord;
                     builder = handlerInput.responseBuilder.withShouldEndSession(false);
                     console.log('supportDisplay:' + display_1.supportsDisplay(handlerInput));
                     if (display_1.supportsDisplay(handlerInput)) {

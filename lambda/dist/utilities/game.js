@@ -28,6 +28,7 @@ var cons = __importStar(require("../utilities/constants"));
 var i18next_1 = __importDefault(require("i18next"));
 var display_1 = require("./display");
 var apl_template_export_json_1 = __importDefault(require("./apl_template_export.json"));
+var RequestInterceptor_1 = require("../interceptors/RequestInterceptor");
 function populateGameQuestions(translatedQuestions) {
     var gameQuestions = [];
     var indexList = [];
@@ -131,7 +132,17 @@ function startGame(newGame, handlerInput) {
         quizName: attributes.quizName,
         answerRecord: [],
     });
-    handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+    RequestInterceptor_1.session.speechOutput = repromptText;
+    RequestInterceptor_1.session.reprmptText = repromptText;
+    RequestInterceptor_1.session.currentQuestionIndex = currentQuestionIndex;
+    RequestInterceptor_1.session.correctAnswerIndex = correctAnswerIndex + 1;
+    RequestInterceptor_1.session.questions = gameQuestions;
+    RequestInterceptor_1.session.score = 0;
+    RequestInterceptor_1.session.correctAnswerText =
+        translatedQuestion[Object.keys(translatedQuestion)[1]][0];
+    RequestInterceptor_1.session.quizName = attributes.quizName;
+    RequestInterceptor_1.session.answerRecord = [];
+    //	handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
     console.log('displayText:' + displayText);
     // レスポンスの生成
     var builder = handlerInput.responseBuilder.withShouldEndSession(false);

@@ -7,6 +7,7 @@ import { supportsDisplay } from './display';
 import apltemplate from './apl_template_export.json';
 import { populateRoundAnswers } from './game';
 import moment from 'moment';
+import { storage, session } from '../interceptors/RequestInterceptor';
 
 function isAnswerSlotValid(intent) {
 	const answerSlotFilled =
@@ -72,9 +73,15 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 	}
 
 	// 回答履歴をsessionに持たせる
+	console.log('currentQuestionIndex:' + currentQuestionIndex);
+	console.log('gameQuestions:' + gameQuestions);
+	console.log('translatedQuestions:' + translatedQuestions);
+
 	const answeredQuestion =
 		translatedQuestions[gameQuestions[currentQuestionIndex]];
+
 	const answeredCode = answeredQuestion[Object.keys(answeredQuestion)[3]];
+
 	console.log('answeredCode:' + answeredCode);
 	const record = { code: answeredCode, correct: isCorrect };
 	answerRecord.push(record);
@@ -142,7 +149,7 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 		return responseBuilder.speak(speechOutput).getResponse();
 	}
 	currentQuestionIndex += 1;
-	correctAnswerIndex = Math.floor(Math.random() * ANSWER_COUNT);
+	correctAnswerIndex = Math.floor(Math.random() * cons.ANSWER_COUNT);
 	const spokenQuestion = Object.keys(
 		translatedQuestions[gameQuestions[currentQuestionIndex]]
 	)[0];
@@ -195,6 +202,16 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 			translatedQuestion[Object.keys(translatedQuestion)[1]][0],
 		answerRecord: answerRecord,
 	});
+
+	session.speechOutput = repromptText;
+	session.reprmptText = repromptText;
+	session.currentQuestionIndex = currentQuestionIndex;
+	session.correctAnswerIndex = correctAnswerIndex + 1;
+	session.questions = gameQuestions;
+	session.score = currentScore;
+	session.correctAnswerText =
+		translatedQuestion[Object.keys(translatedQuestion)[1]][0];
+	session.answerRecord = answerRecord;
 
 	// レスポンスの生成
 	let builder = handlerInput.responseBuilder.withShouldEndSession(false);
