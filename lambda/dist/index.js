@@ -64,6 +64,8 @@ var express_1 = __importDefault(require("express"));
 var Launch_1 = require("./intents/Launch");
 var Answer_1 = require("./intents/Answer");
 var Help_1 = require("./intents/Help");
+var Yes_1 = require("./intents/Yes");
+var Repeat_1 = require("./intents/Repeat");
 var Stop_1 = require("./intents/Stop");
 var Reflector_1 = require("./intents/Reflector");
 var Fallback_1 = require("./intents/Fallback");
@@ -84,7 +86,7 @@ function getPersistenceAdapter(tableName) {
 var skill = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
 // Default intents
-Launch_1.Launch, Answer_1.Answer, Help_1.Help, Stop_1.Stop, SessionEnded_1.SessionEnded, Reflector_1.Reflector, Fallback_1.Fallback)
+Launch_1.Launch, Answer_1.Answer, Yes_1.Yes, Repeat_1.Repeat, Help_1.Help, Stop_1.Stop, SessionEnded_1.SessionEnded, Reflector_1.Reflector, Fallback_1.Fallback)
     .addErrorHandlers(ErrorProcessor_1.ErrorProcessor)
     .addRequestInterceptors(LocalizationRequestInterceptor_1.LocalizationRequestInterceptor, RequestInterceptor_1.RequestInterceptor)
     .addResponseInterceptors(ResponseInterceptor_1.ResponseInterceptor)

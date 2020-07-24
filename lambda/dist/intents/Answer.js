@@ -9,7 +9,9 @@ exports.Answer = {
         return helpers_1.IsIntent(handlerInput, constants_1.IntentTypes.Answer);
     },
     handle: function (handlerInput) {
-        if (handlerInput.requestEnvelope.request.intent.name === 'AnswerIntent') {
+        var name = handlerInput.requestEnvelope.request
+            .intent.name;
+        if (name === 'AnswerIntent') {
             return handle_1.handleUserGuess(false, handlerInput);
         }
         return handle_1.handleUserGuess(true, handlerInput);

@@ -76,7 +76,7 @@ function isAnswerSlotValid(intent) {
 }
 function handleUserGuess(userGaveUp, handlerInput) {
     return __awaiter(this, void 0, void 0, function () {
-        var requestEnvelope, attributesManager, responseBuilder, intent, answerSlotValid, speechOutput, speechOutputAnalysis, sessionAttributes, gameQuestions, correctAnswerIndex, currentScore, currentQuestionIndex, answerRecord, correctAnswerText, isCorrect, translatedQuestions, correctMsgIndex, message, answeredQuestion, answeredCode, record, fullMessage, endSpeech, gameRecord, CURRENT_DATETIME, attributes, displayEndText, builder_1, aplSample, spokenQuestion, displayQuestion, roundAnswersList, roundAnswers, roundAnswersDisp, questionIndexForSpeech, repromptText, displayText, i, translatedQuestion, builder, aplSample;
+        var requestEnvelope, attributesManager, responseBuilder, intent, answerSlotValid, speechOutput, speechOutputAnalysis, sessionAttributes, gameQuestions, correctAnswerIndex, currentScore, currentQuestionIndex, answerRecord, correctAnswerText, isCorrect, translatedQuestions, correctMsgIndex, message, answeredQuestion, answeredCode, record, fullMessage, endSpeech, CURRENT_DATETIME, gameRecord, attributes, displayEndText, builder_1, aplSample, spokenQuestion, displayQuestion, roundAnswersList, roundAnswers, roundAnswersDisp, questionIndexForSpeech, repromptText, displayText, i, translatedQuestion, builder, aplSample;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -141,7 +141,6 @@ function handleUserGuess(userGaveUp, handlerInput) {
                         numCorrect: currentScore.toString(),
                         text: fullMessage,
                     });
-                    gameRecord = '';
                     CURRENT_DATETIME = moment_1.default().format('YYYYMMDDHHmmssSS');
                     gameRecord = { time: CURRENT_DATETIME, record: answerRecord };
                     return [4 /*yield*/, handlerInput.attributesManager.getPersistentAttributes()];

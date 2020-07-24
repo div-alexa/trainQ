@@ -8,6 +8,8 @@ interface IStrings {
 	[Strings.GOODBYE_MSG]: string;
 	[Strings.HELLO_MSG]: string;
 	[Strings.HELP_MSG]: string;
+	[Strings.HELP_START_MSG]: string;
+	[Strings.HELP_GOING_MSG]: string;
 	[Strings.ERROR_MSG]: string;
 	[Strings.REFLECTOR_MSG]: string;
 	[Strings.FALLBACK_MSG]: string;
@@ -19,6 +21,8 @@ interface IStrings {
 	[Strings.CORRECT_ANSWER_MESSAGE]: string;
 	[Strings.ANSWER_IS_MESSAGE]: string;
 	[Strings.GAME_OVER_MESSAGE]: string;
+	[Strings.UNHANDLE_MSG]: string;
+	[Strings.ONE_MORE_MSG]: string;
 }
 
 export const strings = {
@@ -29,10 +33,16 @@ export const strings = {
 			WELCOME_MSG:
 				'鉄道のさんたくクイズを {{num}} 問だします。番号で答えてくださいね？',
 			HELLO_MSG: 'こんにちは',
-			HELP_MSG: 'ヘルプメッセージ',
+			HELP_MSG:
+				'鉄道のさんたくクイズを出します。一番、二番、などの番号で答えてくださいね？',
+			HELP_START_MSG: "クイズを始めるには、'クイズスタート'と言ってください。",
+			HELP_GOING_MSG:
+				"クイズを続けるには'クイズを続けて'と言ってください。それでは何をしましょうか？",
 			GOODBYE_MSG: 'さようなら',
 			REFLECTOR_MSG: '次のインテントが呼ばれました {{intentName}}',
 			FALLBACK_MSG: 'フォールバックメッセージ',
+			UNHANDLE_MSG: 'すみません、わかりませんでした。',
+			ONE_MORE_MSG: 'もう一度お願いできますか？',
 			ERROR_MSG: 'エラーメッセージ',
 			NEW_GAME_MSG: ' {{skillName}} へようこそ。',
 			TELL_QUESTION_MESSAGE: 'それでは第 {{num}}問。<audio src="{{audio}}"/>',

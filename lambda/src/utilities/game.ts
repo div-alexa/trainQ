@@ -32,9 +32,9 @@ function populateGameQuestions(translatedQuestions) {
 
 export function populateRoundAnswers(
 	gameQuestionIndexes,
-	currentQuestionIndex,
-	correctAnswerTargetLocation,
-	translatedQuestions
+	currentQuestionIndex: number,
+	correctAnswerTargetLocation: number,
+	translatedQuestions: string
 ) {
 	const answers = [];
 	const answersDisp = [];

@@ -7,9 +7,9 @@ import { supportsDisplay } from './display';
 import apltemplate from './apl_template_export.json';
 import { populateRoundAnswers } from './game';
 import moment from 'moment';
-import { storage, session } from '../interceptors/RequestInterceptor';
+import { session } from '../interceptors/RequestInterceptor';
 
-function isAnswerSlotValid(intent) {
+function isAnswerSlotValid(intent: any) {
 	const answerSlotFilled =
 		intent && intent.slots && intent.slots.Answer && intent.slots.Answer.value;
 	const answerSlotIsInt =
@@ -101,10 +101,9 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 		});
 
 		// ゲームの結果を永続保存
-		let gameRecord = '';
 		//現在日付を取得
 		const CURRENT_DATETIME = moment().format('YYYYMMDDHHmmssSS');
-		gameRecord = { time: CURRENT_DATETIME, record: answerRecord };
+		const gameRecord = { time: CURRENT_DATETIME, record: answerRecord };
 		const attributes = await handlerInput.attributesManager.getPersistentAttributes();
 		// 初期化
 		if (!attributes.gameRecord) {
@@ -214,7 +213,7 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 	session.answerRecord = answerRecord;
 
 	// レスポンスの生成
-	let builder = handlerInput.responseBuilder.withShouldEndSession(false);
+	const builder = handlerInput.responseBuilder.withShouldEndSession(false);
 	console.log('supportDisplay:' + supportsDisplay(handlerInput));
 	if (supportsDisplay(handlerInput)) {
 		// device has display

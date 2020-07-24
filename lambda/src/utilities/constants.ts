@@ -7,6 +7,8 @@ export enum RequestTypes {
 
 export enum IntentTypes {
 	Help = 'AMAZON.HelpIntent',
+	Yes = 'AMAZON.YesIntent',
+	Repeat = 'AMAZON.RepeatIntent',
 	Stop = 'AMAZON.StopIntent',
 	Cancel = 'AMAZON.CancelIntent',
 	Fallback = 'AMAZON.FallbackIntent',
@@ -26,6 +28,8 @@ export enum Strings {
 	GOODBYE_MSG = 'GOODBYE_MSG',
 	HELLO_MSG = 'HELLO_MSG',
 	HELP_MSG = 'HELP_MSG',
+	HELP_START_MSG = 'HELP_START_MSG',
+	HELP_GOING_MSG = 'HELP_GOING_MSG',
 	ERROR_MSG = 'ERROR_MSG',
 	REFLECTOR_MSG = 'REFLECTOR_MSG',
 	FALLBACK_MSG = 'FALLBACK_MSG',
@@ -37,6 +41,8 @@ export enum Strings {
 	CORRECT_ANSWER_MESSAGE = 'CORRECT_ANSWER_MESSAGE',
 	ANSWER_IS_MESSAGE = 'ANSWER_IS_MESSAGE',
 	GAME_OVER_MESSAGE = 'GAME_OVER_MESSAGE',
+	UNHANDLE_MSG = 'UNHANDLE_MSG',
+	ONE_MORE_MSG = 'ONE_MORE_MSG',
 }
 
 export const ANSWER_COUNT = 3;

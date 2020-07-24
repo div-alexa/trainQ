@@ -4,6 +4,8 @@ import express from 'express';
 import { Launch } from './intents/Launch';
 import { Answer } from './intents/Answer';
 import { Help } from './intents/Help';
+import { Yes } from './intents/Yes';
+import { Repeat } from './intents/Repeat';
 import { Stop } from './intents/Stop';
 import { Reflector } from './intents/Reflector';
 import { Fallback } from './intents/Fallback';
@@ -30,6 +32,8 @@ const skill = Alexa.SkillBuilders.custom()
 		// Default intents
 		Launch,
 		Answer,
+		Yes,
+		Repeat,
 		Help,
 		Stop,
 		SessionEnded,
