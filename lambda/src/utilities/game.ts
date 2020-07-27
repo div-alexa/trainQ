@@ -5,6 +5,7 @@ import i18n from 'i18next';
 import { supportsDisplay } from './display';
 import apltemplate from './apl_template_export.json';
 import { storage, session } from '../interceptors/RequestInterceptor';
+import { getQuiz } from '../utilities/s3';
 
 function populateGameQuestions(translatedQuestions) {
 	const gameQuestions = [];
@@ -85,14 +86,16 @@ export function populateRoundAnswers(
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function startGame(newGame: any, handlerInput: HandlerInput) {
+export async function startGame(newGame: any, handlerInput: HandlerInput) {
 	const attributes = handlerInput.attributesManager.getSessionAttributes();
 	let speechOutput = newGame
 		? i18n.t(cons.Strings.NEW_GAME_MSG, { skillName: 'テスト' }) +
 		  i18n.t(cons.Strings.WELCOME_MSG, { num: cons.GAME_LENGTH })
 		: '';
 
-	const translatedQuestions = i18n.t('QUESTIONS');
+	const questions = JSON.parse(await getQuiz());
+	//const translatedQuestions = i18n.t('QUESTIONS');
+	const translatedQuestions = questions.QUESTIONS_BASE_JA_JP;
 	const gameQuestions = populateGameQuestions(translatedQuestions);
 	const correctAnswerIndex = Math.floor(Math.random() * cons.ANSWER_COUNT);
 
@@ -164,7 +167,7 @@ export function startGame(newGame: any, handlerInput: HandlerInput) {
 
 	// レスポンスの生成
 	const builder = handlerInput.responseBuilder.withShouldEndSession(false);
-	console.log('supportDisplay:' + supportsDisplay(handlerInput));
+	//console.log('supportDisplay:' + supportsDisplay(handlerInput));
 	if (supportsDisplay(handlerInput)) {
 		// device has display
 		//const aplSample = require('./apl_template_export.json');
