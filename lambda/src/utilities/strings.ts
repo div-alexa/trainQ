@@ -1,5 +1,4 @@
 import { Strings, LocaleTypes } from './constants';
-import { questions } from './questions';
 
 interface IStrings {
 	[Strings.QUESTIONS]: string;
@@ -28,7 +27,7 @@ interface IStrings {
 export const strings = {
 	[LocaleTypes.jaJP]: {
 		translation: ({
-			QUESTIONS: questions.QUESTIONS_BASE_JA_JP,
+			QUESTIONS: '',
 			SKILL_NAME: '鉄道クイズ',
 			WELCOME_MSG:
 				'鉄道のさんたくクイズを {{num}} 問だします。番号で答えてくださいね？',

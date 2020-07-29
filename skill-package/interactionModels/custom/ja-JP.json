@@ -1,68 +1,108 @@
 {
-    "interactionModel": {
-        "languageModel": {
-            "invocationName": "鉄道テスト",
-            "intents": [
-                {
-                    "name": "AMAZON.CancelIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.HelpIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.StopIntent",
-                    "samples": [
-                      "終了",
-                      "終わり",
-                      "止めて",
-                      "ストップ"
-                    ]
-                },          
-                {
-                    "name": "AnswerIntent",
-                    "slots": [
-                      {
-                        "name": "Answer",
-                        "type": "AMAZON.NUMBER"
-                      }
-                    ],
-                    "samples": [
-                      "答えは {Answer} 番",
-                      "答えは {Answer}",
-                      "{Answer} 番",
-                      "{Answer}"
-                    ]
-                },
-                {
-                    "name": "AMAZON.RepeatIntent",
-                    "samples": [
-                      "もう一回聞かせて",
-                      "もう一度聞かせて",
-                      "もう一回",
-                      "もう一度"
-                    ]
-                },
-                {
-                    "name": "AMAZON.YesIntent",
-                    "samples": [
-                      "クイズを続けて"
-                    ]
-                },
-                {
-                    "name": "AMAZON.NoIntent",
-                    "samples": [
-                      "いいえ"
-                    ]
-                },          
-                {
-                    "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                }
-            ],
-            "types": []
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "鉄道テスト",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+            "終了",
+            "終わり",
+            "止めて",
+            "ストップ"
+          ]
+        },
+        {
+          "name": "AnswerIntent",
+          "slots": [
+            {
+              "name": "Answer",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "答えは {Answer} 番",
+            "答えは {Answer}",
+            "{Answer} 番",
+            "{Answer}"
+          ]
+        },
+        {
+          "name": "AMAZON.RepeatIntent",
+          "samples": [
+            "もう一回聞かせて",
+            "もう一度聞かせて",
+            "もう一回",
+            "もう一度"
+          ]
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": [
+            "クイズを続けて"
+          ]
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": [
+            "いいえ"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.MoreIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateSettingsIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageUpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PreviousIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollRightIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollLeftIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollUpIntent",
+          "samples": []
         }
+      ],
+      "types": []
     }
-  }
-  
+  },
+  "version": "15"
+}

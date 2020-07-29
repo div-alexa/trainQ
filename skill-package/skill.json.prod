@@ -3,7 +3,7 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "uri": "arn:aws:lambda:ap-northeast-1:224512234609:function:ask-yogurt-default-default-1592753514383"
+          "uri": "arn:aws:lambda:ap-northeast-1:224512234609:function:ask-trainquiz-default-default-1595108643437"
         },
         "interfaces": []
       }

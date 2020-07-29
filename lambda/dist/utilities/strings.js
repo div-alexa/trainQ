@@ -3,11 +3,10 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.strings = void 0;
 var constants_1 = require("./constants");
-var questions_1 = require("./questions");
 exports.strings = (_a = {},
     _a[constants_1.LocaleTypes.jaJP] = {
         translation: {
-            QUESTIONS: questions_1.questions.QUESTIONS_BASE_JA_JP,
+            QUESTIONS: '',
             SKILL_NAME: '鉄道クイズ',
             WELCOME_MSG: '鉄道のさんたくクイズを {{num}} 問だします。番号で答えてくださいね？',
             HELLO_MSG: 'こんにちは',

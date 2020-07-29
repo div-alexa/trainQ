@@ -3,22 +3,30 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.strings = void 0;
 var constants_1 = require("./constants");
-var questions_1 = require("./questions");
 exports.strings = (_a = {},
     _a[constants_1.LocaleTypes.jaJP] = {
         translation: {
-            QUESTIONS: questions_1.questions.QUESTIONS_BASE_JA_JP,
+            QUESTIONS: '',
             SKILL_NAME: '鉄道クイズ',
             WELCOME_MSG: '鉄道のさんたくクイズを {{num}} 問だします。番号で答えてくださいね？',
             HELLO_MSG: 'こんにちは',
-            HELP_MSG: 'ヘルプメッセージ',
+            HELP_MSG: '鉄道のさんたくクイズを出します。一番、二番、などの番号で答えてくださいね？',
+            HELP_START_MSG: "クイズを始めるには、'クイズスタート'と言ってください。",
+            HELP_GOING_MSG: "クイズを続けるには'クイズを続けて'と言ってください。それでは何をしましょうか？",
             GOODBYE_MSG: 'さようなら',
             REFLECTOR_MSG: '次のインテントが呼ばれました {{intentName}}',
             FALLBACK_MSG: 'フォールバックメッセージ',
+            UNHANDLE_MSG: 'すみません、わかりませんでした。',
+            ONE_MORE_MSG: 'もう一度お願いできますか？',
             ERROR_MSG: 'エラーメッセージ',
             NEW_GAME_MSG: ' {{skillName}} へようこそ。',
             TELL_QUESTION_MESSAGE: 'それでは第 {{num}}問。<audio src="{{audio}}"/>',
             DISPLAY_QUESTION_MESSAGE: '第 {{num}}問。 {{displayQ}} ',
+            ANSWER_CORRECT_MESSAGE: '<audio src="{{audio}}"/>{{text}}、正解です。',
+            ANSWER_WRONG_MESSAGE: '<audio src="{{audio}}"/>残念、間違いです。',
+            CORRECT_ANSWER_MESSAGE: '正解は {{num}} 番の {{answer}}でした。',
+            ANSWER_IS_MESSAGE: '',
+            GAME_OVER_MESSAGE: ' {{numAll}} 門中 {{numCorrect}} 問正解でした。{{text}} また遊んでくださいね？',
         },
     },
     _a[constants_1.LocaleTypes.esES] = {

@@ -47,7 +47,7 @@ exports.ResponseInterceptor = {
                 switch (_a.label) {
                     case 0:
                         RequestInterceptor_1.storage.visit = '1';
-                        console.log(RequestInterceptor_1.storage);
+                        console.log(RequestInterceptor_1.session);
                         attributesManager = handlerInput.attributesManager;
                         return [4 /*yield*/, attributesManager.savePersistentAttributes()];
                     case 1:
