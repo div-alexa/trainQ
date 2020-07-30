@@ -8,6 +8,7 @@ import apltemplate from './apl_template_export.json';
 import { populateRoundAnswers } from './game';
 import moment from 'moment';
 import { session } from '../interceptors/RequestInterceptor';
+import { getQuiz } from '../utilities/s3';
 
 function isAnswerSlotValid(intent: any) {
 	const answerSlotFilled =
@@ -43,7 +44,10 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 	const answerRecord = sessionAttributes.answerRecord;
 	const { correctAnswerText } = sessionAttributes;
 	let isCorrect = 0;
-	const translatedQuestions = i18n.t('QUESTIONS');
+	const questions = JSON.parse(await getQuiz());
+	//const translatedQuestions = i18n.t('QUESTIONS');
+	const translatedQuestions = questions.QUESTIONS_BASE_JA_JP;
+
 
 	if (
 		answerSlotValid &&

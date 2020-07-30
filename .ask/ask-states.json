@@ -9,7 +9,8 @@
               "iamRole": "arn:aws:iam::224512234609:role/ask-lambda-trainQuiz-1595108628980",
               "lambda": {
                 "arn": "arn:aws:lambda:ap-northeast-1:224512234609:function:ask-trainquiz-default-default-1595108643437",
-                "lastModified": "2020-07-27T22:16:12.005+0000"
+                "lastModified": "2020-07-30T05:39:12.191+0000",
+                "revisionId": "db3900fd-5030-4535-a056-7cddb53672a9"
               }
             }
           }
@@ -17,10 +18,12 @@
       },
       "skillId": "amzn1.ask.skill.c47c1cab-2600-4427-9b52-eba6c743def6",
       "skillMetadata": {
-        "lastDeployHash": "avd662dJfiU217t4TMeHpqB8F48="
+        "lastDeployHash": "ULB6T0uNeVtw7yx+40L1Ca5/4Pw="
       },
       "code": {
-        "default": {}
+        "default": {
+          "lastDeployHash": "wZgpfAEyKaCoihMAwNORRNZZrOA="
+        }
       }
     }
   }

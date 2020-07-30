@@ -133,7 +133,7 @@ function startGame(newGame, handlerInput) {
                 case 0:
                     attributes = handlerInput.attributesManager.getSessionAttributes();
                     speechOutput = newGame
-                        ? i18next_1.default.t(cons.Strings.NEW_GAME_MSG, { skillName: 'テスト' }) +
+                        ? i18next_1.default.t(cons.Strings.NEW_GAME_MSG, { skillName: '鉄道クイズ' }) +
                             i18next_1.default.t(cons.Strings.WELCOME_MSG, { num: cons.GAME_LENGTH })
                         : '';
                     _b = (_a = JSON).parse;

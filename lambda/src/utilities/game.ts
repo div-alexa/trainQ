@@ -89,7 +89,7 @@ export function populateRoundAnswers(
 export async function startGame(newGame: any, handlerInput: HandlerInput) {
 	const attributes = handlerInput.attributesManager.getSessionAttributes();
 	let speechOutput = newGame
-		? i18n.t(cons.Strings.NEW_GAME_MSG, { skillName: 'テスト' }) +
+		? i18n.t(cons.Strings.NEW_GAME_MSG, { skillName: '鉄道クイズ' }) +
 		  i18n.t(cons.Strings.WELCOME_MSG, { num: cons.GAME_LENGTH })
 		: '';
 

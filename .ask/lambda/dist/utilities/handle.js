@@ -67,6 +67,7 @@ var apl_template_export_json_1 = __importDefault(require("./apl_template_export.
 var game_1 = require("./game");
 var moment_1 = __importDefault(require("moment"));
 var RequestInterceptor_1 = require("../interceptors/RequestInterceptor");
+var s3_1 = require("../utilities/s3");
 function isAnswerSlotValid(intent) {
     var answerSlotFilled = intent && intent.slots && intent.slots.Answer && intent.slots.Answer.value;
     var answerSlotIsInt = answerSlotFilled && !Number.isNaN(parseInt(intent.slots.Answer.value, 10));
@@ -76,9 +77,9 @@ function isAnswerSlotValid(intent) {
 }
 function handleUserGuess(userGaveUp, handlerInput) {
     return __awaiter(this, void 0, void 0, function () {
-        var requestEnvelope, attributesManager, responseBuilder, intent, answerSlotValid, speechOutput, speechOutputAnalysis, sessionAttributes, gameQuestions, correctAnswerIndex, currentScore, currentQuestionIndex, answerRecord, correctAnswerText, isCorrect, translatedQuestions, correctMsgIndex, message, answeredQuestion, answeredCode, record, fullMessage, endSpeech, CURRENT_DATETIME, gameRecord, attributes, displayEndText, builder_1, aplSample, spokenQuestion, displayQuestion, roundAnswersList, roundAnswers, roundAnswersDisp, questionIndexForSpeech, repromptText, displayText, i, translatedQuestion, builder, aplSample;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var requestEnvelope, attributesManager, responseBuilder, intent, answerSlotValid, speechOutput, speechOutputAnalysis, sessionAttributes, gameQuestions, correctAnswerIndex, currentScore, currentQuestionIndex, answerRecord, correctAnswerText, isCorrect, questions, _a, _b, translatedQuestions, correctMsgIndex, message, answeredQuestion, answeredCode, record, fullMessage, endSpeech, CURRENT_DATETIME, gameRecord, attributes, displayEndText, builder_1, aplSample, spokenQuestion, displayQuestion, roundAnswersList, roundAnswers, roundAnswersDisp, questionIndexForSpeech, repromptText, displayText, i, translatedQuestion, builder, aplSample;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
                 case 0:
                     console.log('handleUserGuess');
                     requestEnvelope = handlerInput.requestEnvelope, attributesManager = handlerInput.attributesManager, responseBuilder = handlerInput.responseBuilder;
@@ -95,7 +96,11 @@ function handleUserGuess(userGaveUp, handlerInput) {
                     answerRecord = sessionAttributes.answerRecord;
                     correctAnswerText = sessionAttributes.correctAnswerText;
                     isCorrect = 0;
-                    translatedQuestions = i18next_1.default.t('QUESTIONS');
+                    _b = (_a = JSON).parse;
+                    return [4 /*yield*/, s3_1.getQuiz()];
+                case 1:
+                    questions = _b.apply(_a, [_c.sent()]);
+                    translatedQuestions = questions.QUESTIONS_BASE_JA_JP;
                     if (answerSlotValid &&
                         parseInt(intent.slots.Answer.value, 10) ===
                             sessionAttributes.correctAnswerIndex) {
@@ -129,7 +134,7 @@ function handleUserGuess(userGaveUp, handlerInput) {
                     console.log('answeredCode:' + answeredCode);
                     record = { code: answeredCode, correct: isCorrect };
                     answerRecord.push(record);
-                    if (!(sessionAttributes.currentQuestionIndex === cons.GAME_LENGTH - 1)) return [3 /*break*/, 3];
+                    if (!(sessionAttributes.currentQuestionIndex === cons.GAME_LENGTH - 1)) return [3 /*break*/, 4];
                     speechOutput = userGaveUp ? '' : i18next_1.default.t('ANSWER_IS_MESSAGE');
                     speechOutput += speechOutputAnalysis;
                     fullMessage = '';
@@ -144,8 +149,8 @@ function handleUserGuess(userGaveUp, handlerInput) {
                     CURRENT_DATETIME = moment_1.default().format('YYYYMMDDHHmmssSS');
                     gameRecord = { time: CURRENT_DATETIME, record: answerRecord };
                     return [4 /*yield*/, handlerInput.attributesManager.getPersistentAttributes()];
-                case 1:
-                    attributes = _a.sent();
+                case 2:
+                    attributes = _c.sent();
                     // 初期化
                     if (!attributes.gameRecord) {
                         attributes.gameRecord = [];
@@ -153,8 +158,8 @@ function handleUserGuess(userGaveUp, handlerInput) {
                     attributes.gameRecord.push(gameRecord);
                     handlerInput.attributesManager.setPersistentAttributes(attributes);
                     return [4 /*yield*/, handlerInput.attributesManager.savePersistentAttributes()];
-                case 2:
-                    _a.sent();
+                case 3:
+                    _c.sent();
                     speechOutput += endSpeech.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
                     displayEndText = speechOutputAnalysis + '<br><br>' + endSpeech.replace('？', '');
                     builder_1 = handlerInput.responseBuilder.withShouldEndSession(true);
@@ -179,7 +184,7 @@ function handleUserGuess(userGaveUp, handlerInput) {
                             .speak(speechOutput)
                             //    .withSimpleCard(requestAttributes.t('GAME_NAME'), repromptText)
                             .getResponse())];
-                case 3:
+                case 4:
                     currentQuestionIndex += 1;
                     correctAnswerIndex = Math.floor(Math.random() * cons.ANSWER_COUNT);
                     spokenQuestion = Object.keys(translatedQuestions[gameQuestions[currentQuestionIndex]])[0];

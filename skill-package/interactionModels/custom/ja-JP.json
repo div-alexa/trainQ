@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "鉄道テスト",
+      "invocationName": "鉄道クイズ",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -104,5 +104,5 @@
       "types": []
     }
   },
-  "version": "15"
+  "version": "20"
 }

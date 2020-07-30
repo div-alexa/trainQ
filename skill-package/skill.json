@@ -60,20 +60,27 @@
     },
     "manifestVersion": "1.0",
     "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "containsAds": false,
+      "isChildDirected": true,
+      "isExportCompliant": true,
       "locales": {
         "ja-JP": {}
-      }
+      },
+      "usesPersonalInfo": false
     },
     "publishingInformation": {
       "automaticDistribution": {
         "isActive": false
       },
       "category": "KNOWLEDGE_AND_TRIVIA",
-      "distributionCountries": [],
-      "isAvailableWorldwide": true,
+      "distributionCountries": [
+        "JP"
+      ],
+      "isAvailableWorldwide": false,
       "locales": {
         "ja-JP": {
-          "description": "鉄道の３択クイズで遊ぶことができます。\n毎回ランダムに５問出題します。\n答えは１番から３番の数字で答えるので、小さなお子さんでも簡単に遊べると思います。\n\n画面付きのデバイスであれば問題が画面に表示されます。\n\nクイズはどんどん追加していく予定です。",
+          "description": "鉄道の３択クイズで遊ぶことができます。\n毎回ランダムに５問出題します。\n答えは１番から３番の数字で答えるので、小さなお子さんでも簡単に遊べると思います。\n\n画面付きのデバイスであれば問題が画面に表示されます。\n\nクイズはどんどん追加していく予定です。\n\n【遊び方】\n問題文の後に「答えは何番でしょう」と聞こえたら\n1番から3番の数字で回答します。\n\n問題を聞き取れなかった時は、「もう一回」というと問題文を繰り返します。",
           "examplePhrases": [
             "アレクサ、鉄道クイズを始めて",
             "1番",
@@ -84,14 +91,14 @@
             "鉄道",
             "クイズ"
           ],
-          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/6a3c/86d12365b6cb4895a3d509741801b20b/APP_ICON_LARGE?versionId=VlkqNm7uviNwlnoTaddR3sP65cca1x1_&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200728T215501Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QHE4P6AMV%2F20200728%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=9a93b1d51a59b9f38f262f496e8db823ff74f997a0bb38297177b99e0a4121b4",
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/6a3c/86d12365b6cb4895a3d509741801b20b/APP_ICON_LARGE?versionId=VlkqNm7uviNwlnoTaddR3sP65cca1x1_&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200730T205104Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QHE4P6AMV%2F20200730%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ddf5c52f50f4afe2beda95e6f3adf811b04ebfa40c4d32b5ba01f46adff5c97a",
           "name": "鉄道クイズ",
-          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/1af7/362a65ffd7d241b999bc34921d605727/APP_ICON?versionId=gXEi4f_aImu7Bz1ZR2pT4zpoF.XPgJQo&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200728T215501Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QHE4P6AMV%2F20200728%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=3f9322f66d5d4e3bd17e3c024612fd50a6e695cda4c439c301bc1023ead554b4",
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/1af7/362a65ffd7d241b999bc34921d605727/APP_ICON?versionId=gXEi4f_aImu7Bz1ZR2pT4zpoF.XPgJQo&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200730T205104Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QHE4P6AMV%2F20200730%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=08ca903fd35f6a85851a2ddd17ea78726f384aa656e32bf3659f5a7c54d22026",
           "summary": "鉄道の３択クイズを楽しめるスキルです。",
           "updatesDescription": ""
         }
       },
-      "testingInstructions": "Sample Testing Instructions."
+      "testingInstructions": "このスキルはユーザー認証情報を使用しません。\n\n”鉄道クイズを始めて\" で起動します。\n\n問題文の後に”1番”、”2番”、”3番”のどれかで回答します。\n\n”もう一回”で問題文をもう一度聞くことができます。\n\n”ヘルプ” でリマインダーの設定方法の説明を聞くことができます。\n\n”ストップ”というとスキルが終了します。"
     }
   }
 }
