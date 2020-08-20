@@ -161,6 +161,7 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 		translatedQuestion[Object.keys(translatedQuestion)[1]][0];
 	session.quizName = attributes.quizName;
 	session.answerRecord = [];
+	session.displayText = displayText;
 	//	handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
 	console.log('displayText:' + displayText);

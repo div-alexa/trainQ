@@ -12,6 +12,7 @@ export const Stop: RequestHandler = {
 
 		return handlerInput.responseBuilder
 			.speak(speechText)
+			.withShouldEndSession(true)
 			.withSimpleCard(i18n.t(Strings.SKILL_NAME), speechText)
 			.getResponse();
 	},

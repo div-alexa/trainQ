@@ -48,7 +48,6 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 	//const translatedQuestions = i18n.t('QUESTIONS');
 	const translatedQuestions = questions.QUESTIONS_BASE_JA_JP;
 
-
 	if (
 		answerSlotValid &&
 		parseInt(intent.slots.Answer.value, 10) ===
@@ -204,6 +203,7 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 		correctAnswerText:
 			translatedQuestion[Object.keys(translatedQuestion)[1]][0],
 		answerRecord: answerRecord,
+		displayText: displayText,
 	});
 
 	session.speechOutput = repromptText;
@@ -215,6 +215,7 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 	session.correctAnswerText =
 		translatedQuestion[Object.keys(translatedQuestion)[1]][0];
 	session.answerRecord = answerRecord;
+	session.displayText = displayText;
 
 	// レスポンスの生成
 	const builder = handlerInput.responseBuilder.withShouldEndSession(false);
