@@ -23,9 +23,13 @@ export const Yes: RequestHandler = {
 				const aplSample = apltemplate;
 				//  aplSample.datasources.bodyTemplate6Data.textContent.primaryText.text = repromptText;
 				aplSample.datasources.bodyTemplate6Data.properties.trainQuizSsml =
-					'<speak>' + session.repromptText + '</speak>';
+					'<speak></speak>';
 				aplSample.datasources.bodyTemplate6Data.textContent.primaryText.trainQuizDisplay =
 					session.displayText;
+				console.log(
+					'speak:' +
+						aplSample.datasources.bodyTemplate6Data.properties.trainQuizSsml
+				);
 				builder
 					.addDirective({
 						type: 'Alexa.Presentation.APL.RenderDocument',

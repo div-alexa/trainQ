@@ -95,13 +95,15 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 		speechOutput += speechOutputAnalysis;
 		let fullMessage = '';
 		if (cons.GAME_LENGTH.toString() == currentScore.toString()) {
-			fullMessage = '<br>お見事！全問正解です！<br>';
+			fullMessage = 'all';
 		}
-		const endSpeech = i18n.t('GAME_OVER_MESSAGE', {
-			numAll: cons.GAME_LENGTH.toString(),
-			numCorrect: currentScore.toString(),
-			text: fullMessage,
-		});
+		const endSpeech = i18n
+			.t('GAME_OVER_MESSAGE', {
+				numAll: cons.GAME_LENGTH.toString(),
+				numCorrect: currentScore.toString(),
+				text: fullMessage,
+			})
+			.replace('all', '<br>お見事！全問正解です！<br>');
 
 		// ゲームの結果を永続保存
 		//現在日付を取得
