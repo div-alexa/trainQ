@@ -26,6 +26,8 @@ export const Yes: RequestHandler = {
 					'<speak></speak>';
 				aplSample.datasources.bodyTemplate6Data.textContent.primaryText.trainQuizDisplay =
 					session.displayText;
+				aplSample.datasources.bodyTemplate6Data.textContent.primaryText.trainQuizDisplayChoice =
+					session.displayChoice;
 				console.log(
 					'speak:' +
 						aplSample.datasources.bodyTemplate6Data.properties.trainQuizSsml

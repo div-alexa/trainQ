@@ -126,9 +126,11 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 		num: '1',
 		displayQ: displayQuestion,
 	});
+	let displayChoice = '';
 	for (let i = 0; i < cons.ANSWER_COUNT; i += 1) {
 		repromptText += `${i + 1}番、 ${roundAnswers[i]}。<break time="1s"/>`;
 		displayText += `<br>${i + 1}番：${roundAnswersDisp[i]} `;
+		displayChoice += `<br>${i + 1}番：${roundAnswersDisp[i]} `;
 	}
 	repromptText += '答えは何番でしょう';
 
@@ -137,6 +139,7 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 	const translatedQuestion =
 		translatedQuestions[gameQuestions[currentQuestionIndex]];
 
+	/*
 	Object.assign(sessionAttributes, {
 		speechOutput: repromptText,
 		repromptText,
@@ -150,7 +153,7 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 		quizName: attributes.quizName,
 		answerRecord: [],
 	});
-
+	*/
 	session.speechOutput = repromptText;
 	session.reprmptText = repromptText;
 	session.currentQuestionIndex = currentQuestionIndex;
@@ -162,6 +165,7 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 	session.quizName = attributes.quizName;
 	session.answerRecord = [];
 	session.displayText = displayText;
+	session.displayChoice = displayChoice;
 	//	handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
 	console.log('displayText:' + displayText);
@@ -179,6 +183,7 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 		aplSample.datasources.bodyTemplate6Data.properties.trainQuizSsml =
 			'<speak>' + repromptText + '</speak>';
 		aplSample.datasources.bodyTemplate6Data.textContent.primaryText.trainQuizDisplay = displayText;
+		aplSample.datasources.bodyTemplate6Data.textContent.primaryText.trainQuizDisplayChoice = displayChoice;
 		builder
 			.addDirective({
 				type: 'Alexa.Presentation.APL.RenderDocument',

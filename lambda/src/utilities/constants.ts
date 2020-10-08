@@ -46,7 +46,7 @@ export enum Strings {
 }
 
 export const ANSWER_COUNT = 3;
-export const GAME_LENGTH = 1;
+export const GAME_LENGTH = 5;
 
 export const questionSnd =
 	'https://train-quiz.s3-ap-northeast-1.amazonaws.com/audio/question1_48k.mp3';

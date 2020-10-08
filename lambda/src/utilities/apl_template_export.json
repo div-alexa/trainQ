@@ -62,13 +62,6 @@
                     }
                 ]
             },
-            "textStyleBase0": {
-                "description": "Thin version of basic font",
-                "extend": "textStyleBase",
-                "values": {
-                    "fontWeight": "100"
-                }
-            },
             "textStyleBase1": {
                 "description": "Light version of basic font",
                 "extend": "textStyleBase",
@@ -81,42 +74,18 @@
                     "fontSize": "@textSizeBody"
                 }
             },
-            "mixinPrimary": {
-                "values": {
-                    "fontSize": "@textSizePrimary"
-                }
-            },
-            "mixinSecondary": {
-                "values": {
-                    "fontSize": "@textSizeSecondary"
-                }
-            },
-            "textStylePrimary": {
-                "extend": [
-                    "textStyleBase1",
-                    "mixinPrimary"
-                ]
-            },
-            "textStyleSecondary": {
-                "extend": [
-                    "textStyleBase0",
-                    "mixinSecondary"
-                ]
-            },
             "textStyleBody": {
                 "extend": [
                     "textStyleBase1",
                     "mixinBody"
                 ]
             },
-            "textStyleSecondaryHint": {
+            "round": {
                 "values": {
-                    "fontFamily": "Bookerly",
-                    "fontStyle": "italic",
-                    "fontSize": "@textSizeSecondaryHint",
-                    "color": "@colorTextPrimary"
+                    "fontSize": "30dp"
                 }
-            }
+            },
+
         },
         "onMount": [],
         "graphics": {},
@@ -138,6 +107,7 @@
                             "items": [
                                 {
                                     "type"             : "Pager",
+                                    "when": "${@viewportProfile != @hubRoundSmall}",  
                                     "width": "100vw",
                                     "height": "100vh",
                                     "textAlignVertical": "center",
@@ -147,6 +117,7 @@
                                     "id"               : "foobar",
                                     "items":[
                                         {
+                                            "paddingTop": "70",
                                             "paddingLeft": "@marginLeft",
                                             "paddingRight": "@marginRight",
                                             "type": "Text",
@@ -157,6 +128,7 @@
                                     
                                         },
                                         {
+                                            "paddingTop": "10",
                                             "paddingLeft": "@marginLeft",
                                             "paddingRight": "@marginRight",
                                             "type": "Text",
@@ -164,6 +136,41 @@
                                             "text": "${payload.bodyTemplate6Data.textContent.primaryText.trainQuizDisplay}",
                                             "speech": "${payload.bodyTemplate6Data.properties.trainQuizSpeech}",
                                             "style": "textStyleBody",
+                                            "textAlign": "${viewport.shape == 'round' ? 'center' : 'left'}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type"             : "Pager",
+                                    "when": "${@viewportProfile == @hubRoundSmall}",  
+                                    "width": "100vw",
+                                    "height": "100vh",
+                                    "textAlignVertical": "center",
+                                    "textAlign"        : "center",
+                                    "navigation"       : "normal",
+                                    "initialPage"      : 0,
+                                    "id"               : "foobar",
+                                    "items":[
+                                        {
+                                            "paddingTop": "90",
+                                            "paddingLeft": "@marginLeft",
+                                            "paddingRight": "@marginRight",
+                                            "type": "Text",
+                                            "id": "quizResult",
+                                            "text": "${payload.bodyTemplate6Data.textContent.primaryText.quizResult}",
+                                            "style": "round",
+                                            "textAlign": "${viewport.shape == 'round' ? 'center' : 'left'}"
+                                    
+                                        },
+                                        {
+                                            "paddingTop": "70",
+                                            "paddingLeft": "@marginLeft",
+                                            "paddingRight": "@marginRight",
+                                            "type": "Text",
+                                            "id": "trainQuiz",
+                                            "text": "${payload.bodyTemplate6Data.textContent.primaryText.trainQuizDisplayChoice}",
+                                            "speech": "${payload.bodyTemplate6Data.properties.trainQuizSpeech}",
+                                            "style": "round",
                                             "textAlign": "${viewport.shape == 'round' ? 'center' : 'left'}"
                                         }
                                     ]
@@ -179,56 +186,12 @@
         "bodyTemplate6Data": {
             "type": "object",
             "objectId": "bt6Sample",
-            "backgroundImage": {
-                "contentDescription": null,
-                "smallSourceUrl": null,
-                "largeSourceUrl": null,
-                "sources": [
-                    {
-                        "url": "https://d2o906d8ln7ui1.cloudfront.net/images/BT6_Background.png",
-                        "size": "small",
-                        "widthPixels": 0,
-                        "heightPixels": 0
-                    },
-                    {
-                        "url": "https://d2o906d8ln7ui1.cloudfront.net/images/BT6_Background.png",
-                        "size": "large",
-                        "widthPixels": 0,
-                        "heightPixels": 0
-                    }
-                ]
-            },
-            "image": {
-                "contentDescription": null,
-                "smallSourceUrl": null,
-                "largeSourceUrl": null,
-                "sources": [
-                    {
-                        "url": "http://images.media-allrecipes.com/userphotos/250x250/303241.jpg",
-                        "size": "small",
-                        "widthPixels": 0,
-                        "heightPixels": 0
-                    },
-                    {
-                        "url": "http://images.media-allrecipes.com/userphotos/250x250/303241.jpg",
-                        "size": "large",
-                        "widthPixels": 0,
-                        "heightPixels": 0
-                    }
-                ]
-            },
             "textContent": {
                 "primaryText": {
-                    "trainQuizSsml": "Welcome to The Daily Cheese"
+                    "trainQuizSsml": ""
                 }
             },
-            "logoUrl": "https://d2o906d8ln7ui1.cloudfront.net/images/cheeseskillicon.png",
-            "hintText": "Try, \"Alexa, what is today's cheesy joke?\"",
             "properties": {
-                "backgroundImage": "https://.../catfacts.png",
-                "title": "猫の秘密 #9",
-                "logoUrl": "https://.../logo.png",
-                "image": "https://.../catfact9.png",
                 "quizResultSsml": "<speak>電車のクイズです。</speak>"
             },
             "transformers": [{
