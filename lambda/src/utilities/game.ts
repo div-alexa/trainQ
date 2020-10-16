@@ -6,6 +6,7 @@ import { supportsDisplay } from './display';
 import apltemplate from './apl_template_export.json';
 import { storage, session } from '../interceptors/RequestInterceptor';
 import { getQuiz } from '../utilities/s3';
+import * as moment from 'moment-timezone';
 
 function populateGameQuestions(translatedQuestions) {
 	const gameQuestions = [];
@@ -88,14 +89,59 @@ export function populateRoundAnswers(
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export async function startGame(newGame: any, handlerInput: HandlerInput) {
 	const attributes = handlerInput.attributesManager.getSessionAttributes();
-	let speechOutput = newGame
-		? i18n.t(cons.Strings.NEW_GAME_MSG, { skillName: '鉄道クイズ' }) +
-		  i18n.t(cons.Strings.WELCOME_MSG, { num: cons.GAME_LENGTH })
-		: '';
+
+	//現在日付を取得
+	const CURRENT_DATETIME = moment.tz('Asia/Tokyo').format('YYYY-MM-DD HH:mm');
+	console.log('CDTIME: %s', CURRENT_DATETIME);
+	if (!storage.lastPlayTime) {
+		storage.lastPlayTime = CURRENT_DATETIME;
+	}
+	const lastTime = moment.parseZone(storage.lastPlayTime);
+	const nowTime = moment.parseZone(CURRENT_DATETIME);
+	//前回のクイズからの時間を計算
+	const timeDiff = nowTime.diff(lastTime, 'hours', true);
+	storage.lastPlayTime = CURRENT_DATETIME;
 
 	const questions = JSON.parse(await getQuiz());
 	//const translatedQuestions = i18n.t('QUESTIONS');
 	const translatedQuestions = questions.QUESTIONS_BASE_JA_JP;
+
+	if (!storage.totalQuiz) {
+		storage.totalQuiz = translatedQuestions.length;
+	}
+	const addedQuiz = translatedQuestions.length - storage.totalQuiz;
+	if (addedQuiz > 0) {
+		console.log('追加したクイズ' + addedQuiz);
+	}
+	storage.totalQuiz = translatedQuestions.length;
+
+	// 初回のみ
+	// 前回から1時間以上あく
+	// 前回から1時間以内
+	let speechOutput = '';
+
+	console.log('newG:' + newGame);
+	console.log('addedQ:' + addedQuiz);
+	console.log('timeDiff:' + timeDiff);
+	if (newGame) {
+		if (storage.playCount == 1) {
+			speechOutput =
+				i18n.t(cons.Strings.NEW_GAME_MSG, { skillName: '鉄道クイズ' }) +
+				i18n.t(cons.Strings.WELCOME_MSG, { num: cons.GAME_LENGTH });
+		} else if (storage.playCount > 1 && timeDiff >= 1) {
+			speechOutput = i18n.t(cons.Strings.WELCOME_BACK_MSG);
+			// 前回からクイズが増えている
+			if (addedQuiz > 0) {
+				speechOutput += i18n.t(cons.Strings.ADD_QUIZ_MSG, { num: addedQuiz });
+			}
+			speechOutput += i18n.t(cons.Strings.SOON_MSG);
+		} else if (storage.playCount > 1 && timeDiff < 1) {
+			if (addedQuiz > 0) {
+				speechOutput = i18n.t(cons.Strings.ADD_QUIZ_MSG, { num: addedQuiz });
+			}
+			speechOutput += i18n.t(cons.Strings.SOON_MSG);
+		}
+	}
 	const gameQuestions = populateGameQuestions(translatedQuestions);
 	const correctAnswerIndex = Math.floor(Math.random() * cons.ANSWER_COUNT);
 

@@ -54,11 +54,12 @@ exports.handler = async (event: RequestEnvelope, context: any) => {
 
 //////////////////////////////// App ////////////////////////////////
 
+/*
 // サーバー情報
 const PORT = 3000;
 const ENDPOINT = '/';
 
 const adapter = new ExpressAdapter(skill, false, false);
 express().post(ENDPOINT, adapter.getRequestHandlers()).listen(PORT);
-
+*/
 console.log('start!');

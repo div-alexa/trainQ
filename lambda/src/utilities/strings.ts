@@ -22,6 +22,9 @@ interface IStrings {
 	[Strings.GAME_OVER_MESSAGE]: string;
 	[Strings.UNHANDLE_MSG]: string;
 	[Strings.ONE_MORE_MSG]: string;
+	[Strings.WELCOME_BACK_MSG]: string;
+	[Strings.SOON_MSG]: string;
+	[Strings.ADD_QUIZ_MSG]: string;
 }
 
 export const strings = {
@@ -37,13 +40,18 @@ export const strings = {
 			HELP_START_MSG: "クイズを始めるには、'クイズスタート'と言ってください。",
 			HELP_GOING_MSG:
 				"クイズを続けるには'クイズを続けて'と言ってください。それでは何をしましょうか？",
-			GOODBYE_MSG: 'わかりました、クイズを終了します。また遊んでくださいね？',
+			GOODBYE_MSG: 'わかりました、クイズを終了します。がんばって問題を増やしていきますので、また遊んでくださいね？',
 			REFLECTOR_MSG: '次のインテントが呼ばれました {{intentName}}',
 			FALLBACK_MSG: 'フォールバックメッセージ',
 			UNHANDLE_MSG: 'すみません、わかりませんでした。',
 			ONE_MORE_MSG: 'もう一度お願いできますか？',
 			ERROR_MSG: 'エラーが発生しました。',
-			NEW_GAME_MSG: ' {{skillName}} へようこそ。',
+			NEW_GAME_MSG:
+				' はじめまして。鉄道クイズを選んでくれてありがとうございます。鉄道って、知れば知るほど面白いですよね？<break time="1s"/>このスキルでは',
+			WELCOME_BACK_MSG:
+				' また<phoneme alphabet="x-amazon-pron-kana" ph="アソンデクレテ">遊んでくれて</phoneme>ありがとうございます。',
+			SOON_MSG: 'さっそくクイズを始めましょう。',
+			ADD_QUIZ_MSG: '前より{{num}}問、増やしておきましたよ？',
 			TELL_QUESTION_MESSAGE: 'それでは第 {{num}}問。<audio src="{{audio}}"/>',
 			DISPLAY_QUESTION_MESSAGE: '第 {{num}}問。 {{displayQ}} ',
 			ANSWER_CORRECT_MESSAGE: '<audio src="{{audio}}"/>{{text}}、正解です。',
@@ -51,7 +59,7 @@ export const strings = {
 			CORRECT_ANSWER_MESSAGE: '正解は {{num}} 番の {{answer}}でした。',
 			ANSWER_IS_MESSAGE: '',
 			GAME_OVER_MESSAGE:
-				' {{numAll}} 門中 {{numCorrect}} 問正解でした。{{text}} また遊んでくださいね？',
+				' {{numAll}} 門中 {{numCorrect}} 問正解でした。{{text}} がんばって問題を増やしていきますので、また遊んでくださいね？',
 		} as unknown) as IStrings,
 	},
 	[LocaleTypes.esES]: {
