@@ -97,11 +97,15 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 		if (cons.GAME_LENGTH.toString() == currentScore.toString()) {
 			fullMessage = 'all';
 		}
+		const appealMssage = session.soon
+			? ''
+			: 'がんばって問題を増やしていきますので、';
 		const endSpeech = i18n
 			.t('GAME_OVER_MESSAGE', {
 				numAll: cons.GAME_LENGTH.toString(),
 				numCorrect: currentScore.toString(),
 				text: fullMessage,
+				appeal: appealMssage,
 			})
 			.replace('all', '<br>お見事！全問正解です！<br>');
 

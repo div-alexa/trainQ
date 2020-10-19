@@ -40,7 +40,8 @@ export const strings = {
 			HELP_START_MSG: "クイズを始めるには、'クイズスタート'と言ってください。",
 			HELP_GOING_MSG:
 				"クイズを続けるには'クイズを続けて'と言ってください。それでは何をしましょうか？",
-			GOODBYE_MSG: 'わかりました、クイズを終了します。がんばって問題を増やしていきますので、また遊んでくださいね？',
+			GOODBYE_MSG:
+				'わかりました、クイズを終了します。がんばって問題を増やしていきますので、また遊んでくださいね？',
 			REFLECTOR_MSG: '次のインテントが呼ばれました {{intentName}}',
 			FALLBACK_MSG: 'フォールバックメッセージ',
 			UNHANDLE_MSG: 'すみません、わかりませんでした。',
@@ -59,7 +60,7 @@ export const strings = {
 			CORRECT_ANSWER_MESSAGE: '正解は {{num}} 番の {{answer}}でした。',
 			ANSWER_IS_MESSAGE: '',
 			GAME_OVER_MESSAGE:
-				' {{numAll}} 門中 {{numCorrect}} 問正解でした。{{text}} がんばって問題を増やしていきますので、また遊んでくださいね？',
+				' {{numAll}} 門中 {{numCorrect}} 問正解でした。{{text}} {{appeal}}また遊んでくださいね？',
 		} as unknown) as IStrings,
 	},
 	[LocaleTypes.esES]: {

@@ -124,6 +124,7 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 	console.log('addedQ:' + addedQuiz);
 	console.log('timeDiff:' + timeDiff);
 	if (newGame) {
+		session.soon = 0;
 		if (storage.playCount == 1) {
 			speechOutput =
 				i18n.t(cons.Strings.NEW_GAME_MSG, { skillName: '鉄道クイズ' }) +
@@ -140,6 +141,7 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 				speechOutput = i18n.t(cons.Strings.ADD_QUIZ_MSG, { num: addedQuiz });
 			}
 			speechOutput += i18n.t(cons.Strings.SOON_MSG);
+			session.soon = 1;
 		}
 	}
 	const gameQuestions = populateGameQuestions(translatedQuestions);

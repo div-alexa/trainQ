@@ -9,8 +9,8 @@
               "iamRole": "arn:aws:iam::224512234609:role/ask-lambda-trainQuiz-1595108628980",
               "lambda": {
                 "arn": "arn:aws:lambda:ap-northeast-1:224512234609:function:ask-trainquiz-default-default-1595108643437",
-                "lastModified": "2020-10-11T21:54:18.849+0000",
-                "revisionId": "767203ab-638b-4b28-82d0-dffd637349a5"
+                "lastModified": "2020-10-16T22:43:30.946+0000",
+                "revisionId": "80af2b64-40b4-4982-aad5-16311076dd3f"
               }
             }
           }
@@ -22,7 +22,7 @@
       },
       "code": {
         "default": {
-          "lastDeployHash": "qVpArOqkSFsyNqXXicnUNMb//Jw="
+          "lastDeployHash": "NeArRd62bA9sHPw5hP1GzNn/vaE="
         }
       }
     }
