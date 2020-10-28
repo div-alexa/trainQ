@@ -24,7 +24,7 @@ function isAnswerSlotValid(intent: any) {
 
 export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 	console.log('handleUserGuess');
-	const { requestEnvelope, attributesManager, responseBuilder } = handlerInput;
+	const { requestEnvelope, responseBuilder } = handlerInput;
 	const { intent } = requestEnvelope.request as Model.IntentRequest;
 
 	const answerSlotValid = isAnswerSlotValid(intent);
@@ -32,17 +32,16 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 
 	let speechOutput = '';
 	let speechOutputAnalysis = '';
+	let speechOutputAnalysisSpeech = '';
 
-	const sessionAttributes = attributesManager.getSessionAttributes();
-	const gameQuestions = sessionAttributes.questions;
-	let correctAnswerIndex = parseInt(sessionAttributes.correctAnswerIndex, 10);
-	let currentScore = parseInt(sessionAttributes.score, 10);
-	let currentQuestionIndex = parseInt(
-		sessionAttributes.currentQuestionIndex,
-		10
-	);
-	const answerRecord = sessionAttributes.answerRecord;
-	const { correctAnswerText } = sessionAttributes;
+	//const sessionAttributes = attributesManager.getSessionAttributes();
+	const gameQuestions = session.questions;
+	let correctAnswerIndex = parseInt(session.correctAnswerIndex, 10);
+	let currentScore = parseInt(session.score, 10);
+	let currentQuestionIndex = parseInt(session.currentQuestionIndex, 10);
+	const answerRecord = session.answerRecord;
+	const { correctAnswerText } = session;
+	const { correctAnswerSpeech } = session;
 	let isCorrect = 0;
 	const questions = JSON.parse(await getQuiz());
 	//const translatedQuestions = i18n.t('QUESTIONS');
@@ -50,12 +49,15 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 
 	if (
 		answerSlotValid &&
-		parseInt(intent.slots.Answer.value, 10) ===
-			sessionAttributes.correctAnswerIndex
+		parseInt(intent.slots.Answer.value, 10) === session.correctAnswerIndex
 	) {
 		currentScore += 1;
 		const correctMsgIndex = Math.floor(Math.random() * 3);
 		const message = ['すごい', 'やったね', 'さすがですね'];
+		speechOutputAnalysisSpeech = i18n.t('ANSWER_CORRECT_MESSAGE', {
+			audio: cons.correctSnd,
+			text: message[correctMsgIndex],
+		});
 		speechOutputAnalysis = i18n.t('ANSWER_CORRECT_MESSAGE', {
 			audio: cons.correctSnd,
 			text: message[correctMsgIndex],
@@ -67,6 +69,10 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 				audio: cons.incorrectSnd,
 			});
 		}
+
+		speechOutputAnalysisSpeech =
+			speechOutputAnalysis +
+			`正解は ${correctAnswerIndex} 番の、 ${correctAnswerSpeech}でした。`;
 
 		speechOutputAnalysis += i18n.t('CORRECT_ANSWER_MESSAGE', {
 			num: correctAnswerIndex,
@@ -90,9 +96,9 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 	answerRecord.push(record);
 
 	// Check if we can exit the game session after GAME_LENGTH questions (zero-indexed)
-	if (sessionAttributes.currentQuestionIndex === cons.GAME_LENGTH - 1) {
+	if (session.currentQuestionIndex === cons.GAME_LENGTH - 1) {
 		speechOutput = userGaveUp ? '' : i18n.t('ANSWER_IS_MESSAGE');
-		speechOutput += speechOutputAnalysis;
+		speechOutput += speechOutputAnalysisSpeech;
 		let fullMessage = '';
 		if (cons.GAME_LENGTH.toString() == currentScore.toString()) {
 			fullMessage = 'all';
@@ -188,7 +194,8 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 	repromptText += '答えは何番でしょう';
 
 	speechOutput += userGaveUp ? '' : i18n.t('ANSWER_IS_MESSAGE');
-	speechOutput += speechOutputAnalysis;
+	//speechOutput += speechOutputAnalysis;
+	speechOutput += speechOutputAnalysisSpeech;
 	// 第x門、ジャジャンまで含める。
 	speechOutput += i18n.t('TELL_QUESTION_MESSAGE', {
 		num: questionIndexForSpeech.toString(),
@@ -223,6 +230,8 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 	session.score = currentScore;
 	session.correctAnswerText =
 		translatedQuestion[Object.keys(translatedQuestion)[1]][0];
+	session.correctAnswerSpeech =
+		translatedQuestion[Object.keys(translatedQuestion)[0]][0];
 	session.answerRecord = answerRecord;
 	session.displayText = displayText;
 	session.displayChoice = displayChoice;

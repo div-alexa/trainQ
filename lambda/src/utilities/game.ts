@@ -182,7 +182,7 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 	}
 	repromptText += '答えは何番でしょう';
 
-	const sessionAttributes = {};
+	//const sessionAttributes = {};
 
 	const translatedQuestion =
 		translatedQuestions[gameQuestions[currentQuestionIndex]];
@@ -210,6 +210,8 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 	session.score = 0;
 	session.correctAnswerText =
 		translatedQuestion[Object.keys(translatedQuestion)[1]][0];
+	session.correctAnswerSpeech =
+		translatedQuestion[Object.keys(translatedQuestion)[0]][0];
 	session.quizName = attributes.quizName;
 	session.answerRecord = [];
 	session.displayText = displayText;
