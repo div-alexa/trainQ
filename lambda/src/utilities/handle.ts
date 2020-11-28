@@ -54,10 +54,12 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 		currentScore += 1;
 		const correctMsgIndex = Math.floor(Math.random() * 3);
 		const message = ['すごい', 'やったね', 'さすがですね'];
+		const messagewithem = `<amazon:emotion name="excited" intensity="low">${message[correctMsgIndex]}</amazon:emotion>`;
 		speechOutputAnalysisSpeech = i18n.t('ANSWER_CORRECT_MESSAGE', {
 			audio: cons.correctSnd,
-			text: message[correctMsgIndex],
+			text: messagewithem,
 		});
+		speechOutputAnalysisSpeech = `<audio src="${cons.correctSnd}"/>${messagewithem}、正解です。`;
 		speechOutputAnalysis = i18n.t('ANSWER_CORRECT_MESSAGE', {
 			audio: cons.correctSnd,
 			text: message[correctMsgIndex],
@@ -72,7 +74,7 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 
 		speechOutputAnalysisSpeech =
 			speechOutputAnalysis +
-			`正解は ${correctAnswerIndex} 番の、 ${correctAnswerSpeech}でした。`;
+			`正解は ${correctAnswerIndex} 番の。 ${correctAnswerSpeech}。<phoneme alphabet="x-amazon-pron-kana" ph="デ'シタ">でした</phoneme>。<break time="1s"/> `;
 
 		speechOutputAnalysis += i18n.t('CORRECT_ANSWER_MESSAGE', {
 			num: correctAnswerIndex,
@@ -113,8 +115,18 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 				text: fullMessage,
 				appeal: appealMssage,
 			})
-			.replace('all', '<br>お見事！全問正解です！<br>');
-
+			.replace('all', '<br>お見事！全問正解です！');
+		const endSpeechem = i18n
+			.t('GAME_OVER_MESSAGE', {
+				numAll: cons.GAME_LENGTH.toString(),
+				numCorrect: currentScore.toString(),
+				text: fullMessage,
+				appeal: appealMssage,
+			})
+			.replace(
+				'all',
+				'<br><amazon:emotion name="excited" intensity="low">お見事！全問正解です！</amazon:emotion><br>'
+			);
 		// ゲームの結果を永続保存
 		//現在日付を取得
 		const CURRENT_DATETIME = moment().format('YYYYMMDDHHmmssSS');
@@ -129,7 +141,9 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 		handlerInput.attributesManager.setPersistentAttributes(attributes);
 		await handlerInput.attributesManager.savePersistentAttributes();
 
-		speechOutput += endSpeech.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
+		//speechOutput += endSpeech.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
+		console.log(endSpeechem);
+		speechOutput += endSpeechem.replace(/<br>/g, '');
 		const displayEndText =
 			speechOutputAnalysis + '<br><br>' + endSpeech.replace('？', '');
 
@@ -187,7 +201,7 @@ export async function handleUserGuess(userGaveUp, handlerInput: HandlerInput) {
 
 	let displayChoice = '';
 	for (let i = 0; i < cons.ANSWER_COUNT; i += 1) {
-		repromptText += `${i + 1}番、 ${roundAnswers[i]}。<break time="1s"/>`;
+		repromptText += `${i + 1}番。 ${roundAnswers[i]}。<break time="1s"/>`;
 		displayText += `<br>${i + 1}番：${roundAnswersDisp[i]} `;
 		displayChoice += `<br>${i + 1}番：${roundAnswersDisp[i]} `;
 	}

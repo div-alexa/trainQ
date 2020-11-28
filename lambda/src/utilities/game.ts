@@ -176,7 +176,7 @@ export async function startGame(newGame: any, handlerInput: HandlerInput) {
 	});
 	let displayChoice = '';
 	for (let i = 0; i < cons.ANSWER_COUNT; i += 1) {
-		repromptText += `${i + 1}番、 ${roundAnswers[i]}。<break time="1s"/>`;
+		repromptText += `${i + 1}番。 ${roundAnswers[i]}。<break time="1s"/>`;
 		displayText += `<br>${i + 1}番：${roundAnswersDisp[i]} `;
 		displayChoice += `<br>${i + 1}番：${roundAnswersDisp[i]} `;
 	}
